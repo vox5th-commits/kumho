@@ -9,86 +9,88 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans KR', system-ui, sans-serif; }
-        .hero-img { 
-            filter: brightness(0.95) contrast(1.05);
+        .hero-img {
+            max-height: 65vh;
+            object-fit: cover;
             box-shadow: 0 25px 50px -12px rgb(165 243 252);
+        }
+        @media (max-width: 640px) {
+            .hero-img { max-height: 70vh; }
         }
     </style>
 </head>
-<body class="bg-sky-50 text-slate-800 overflow-x-hidden">
+<body class="bg-sky-50 text-slate-800">
 
-    <!-- 메인 사진 히어로 -->
-    <div class="relative">
-        <img src="main-photo.jpg" 
-             alt="손태국 금호읍장님" 
-             class="hero-img w-full h-auto block">
-        
-        <!-- 사진 위에 부드러운 오버레이 타이틀 -->
-        <div class="absolute top-0 left-0 right-0 h-full bg-gradient-to-b from-transparent via-transparent to-black/40 flex items-end justify-center pb-12">
-            <div class="text-center text-white px-6">
-                <div class="text-5xl font-bold tracking-tighter mb-1">퇴임식에</div>
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl overflow-hidden">
+
+        <!-- 메인 사진 -->
+        <div class="relative">
+            <img src="main-photo.jpg" 
+                 alt="손태국 금호읍장님" 
+                 class="hero-img w-full block">
+            
+            <!-- 오버레이 타이틀 -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 flex flex-col items-center justify-end pb-10 text-white text-center">
+                <div class="text-5xl font-bold tracking-tighter leading-none mb-1">퇴임식에</div>
                 <div class="text-6xl font-bold tracking-tighter drop-shadow-md">초대합니다</div>
-                <div class="mt-6 flex justify-center gap-8 text-4xl">
-                    <div>🌸</div><div>🌼</div><div>🌺</div>
+                
+                <div class="flex gap-6 mt-8 text-5xl">
+                    <span>🌸</span>
+                    <span>🌼</span>
+                    <span>🌺</span>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- 상세 정보 -->
-    <div class="max-w-md mx-auto px-6 pb-20 -mt-6 relative z-10">
-        
-        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
-            <div class="flex items-center gap-4 text-2xl mb-6">
-                <span>📅</span>
-                <div class="flex-1">
-                    <p class="font-semibold">2026년 6월 18일 (목요일)</p>
-                    <p class="text-4xl font-bold text-sky-600">오전 10:00</p>
+        <!-- 내용 -->
+        <div class="px-6 pb-12 pt-2 space-y-8">
+            
+            <!-- 날짜 -->
+            <div class="bg-white rounded-3xl shadow p-7 text-center">
+                <div class="flex justify-center mb-2">
+                    <span class="px-4 py-1 bg-sky-100 text-sky-600 text-sm font-medium rounded-3xl">2026년 6월 18일 (목요일)</span>
+                </div>
+                <p class="text-5xl font-bold text-sky-600 mt-3">오전 10:00</p>
+                <p class="text-slate-600 mt-1">금호읍 행정복지센터 대강당</p>
+            </div>
+
+            <!-- 장소 -->
+            <div class="bg-white rounded-3xl p-7 shadow">
+                <div class="flex items-center gap-4 mb-5">
+                    <span class="text-3xl">📍</span>
+                    <div>
+                        <p class="font-semibold text-lg">금호읍 행정복지센터 대강당</p>
+                        <p class="text-slate-600">경상북도 영천시 금호읍 금호로 153</p>
+                    </div>
+                </div>
+                <div class="rounded-2xl overflow-hidden border">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.2!2d128.8985!3d36.0123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565f0b0b0b0b0b0%3A0x1234567890abcdef!2z6rSR7KSA7Yq47YOg7Iuc6rSR7JyV7ISx7Iuc!5e0!3m2!1sko!2skr!4v1713000000000" 
+                            width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
-            <p class="text-slate-500 text-center">금호읍 행정복지센터 대강당</p>
-        </div>
 
-        <!-- 장소 -->
-        <div class="bg-white rounded-3xl p-8 mb-8 shadow">
-            <div class="flex items-center gap-4 text-2xl mb-6">
-                <span>📍</span>
-                <div>
-                    <p class="font-semibold">금호읍 행정복지센터 대강당</p>
-                    <p class="text-slate-600">경상북도 영천시 금호읍 금호로 153</p>
-                </div>
+            <!-- 메시지 -->
+            <div class="bg-gradient-to-br from-sky-50 to-pink-50 rounded-3xl p-8 text-center">
+                <p class="text-lg leading-relaxed italic text-slate-700">
+                    금호의 따뜻한 봄바람처럼,<br>
+                    당신의 헌신을 늘 기억하겠습니다.<br>
+                    새로운 시작을 축하합니다.
+                </p>
+                <div class="mt-6 text-sky-600 text-sm font-medium">— 금호읍 주민 및 직원 일동 —</div>
             </div>
-            <div class="rounded-2xl overflow-hidden border border-slate-100 mt-4">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.2!2d128.8985!3d36.0123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565f0b0b0b0b0b0%3A0x1234567890abcdef!2z6rSR7KSA7Yq47YOg7Iuc6rSR7JyV7ISx7Iuc!5e0!3m2!1sko!2skr!4v1713000000000" 
-                        width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
 
-        <!-- 사진 속 메시지 강조 -->
-        <div class="text-center bg-gradient-to-br from-sky-100 to-pink-100 rounded-3xl p-8 mb-8">
-            <p class="text-xl leading-relaxed italic text-slate-700">
-                금호의 따뜻한 봄바람처럼,<br>
-                당신의 헌신을 늘 기억하겠습니다.<br>
-                새로운 시작을 축하합니다.
-            </p>
-            <div class="mt-8 text-sky-600 font-bold text-sm">— 금호읍 주민 및 직원 일동 —</div>
-        </div>
-
-        <!-- 연락 & 공유 -->
-        <div class="text-center text-sm bg-white rounded-3xl p-6 shadow">
-            <p class="mb-2">문의 · 참석 여부</p>
-            <p class="font-medium text-sky-600">금호읍 행정복지센터 054-339-7011</p>
-            <button onclick="alert('카카오톡으로 링크 공유하세요!')" 
-                    class="mt-6 w-full py-5 bg-slate-800 text-white rounded-3xl flex items-center justify-center gap-3 text-lg font-medium">
+            <!-- 공유 버튼 -->
+            <button onclick="alert('카카오톡으로 공유하세요 💕')" 
+                    class="w-full py-5 bg-gradient-to-r from-sky-500 to-pink-500 text-white rounded-3xl font-semibold text-lg flex items-center justify-center gap-3 shadow-lg">
                 <i class="fas fa-share-alt"></i>
-                <span>초대장 링크 공유하기</span>
+                초대장 링크 공유하기
             </button>
         </div>
+
     </div>
 
-    <footer class="text-center text-xs text-slate-400 py-12">
-        © 2026 손태국 금호읍장님 퇴임식 초대장<br>
-        모바일로 만든 따뜻한 초대장 💕
+    <footer class="text-center text-xs text-slate-400 py-8">
+        © 2026 손태국 금호읍장님 퇴임식 모바일 초대장
     </footer>
 
     <script>
