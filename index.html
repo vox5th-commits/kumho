@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>손태국 금호읍장님 퇴임식에 초대합니다 🌸</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans KR', system-ui, sans-serif; }
@@ -59,13 +60,10 @@
                         <p class="text-slate-600">경상북도 영천시 금호읍 금호로 153</p>
                     </div>
                 </div>
-
-                <!-- 카카오맵 버튼 (iframe 제거) -->
                 <a href="https://map.kakao.com/?q=%EA%B8%88%ED%98%B8%EC%9D%8D+%ED%96%89%EC%A0%95%EB%B3%B5%EC%A7%80%EC%84%BC%ED%84%B0" 
                    target="_blank"
                    class="block w-full bg-[#FEE500] hover:bg-[#FDD700] text-black font-semibold py-4 rounded-2xl text-center flex items-center justify-center gap-2 shadow-md">
-                    <span class="text-xl">🗺️</span>
-                    카카오맵 앱으로 위치 보기
+                    🗺️ 카카오맵 앱으로 위치 보기
                 </a>
             </div>
 
@@ -85,12 +83,20 @@
                 <div class="grid grid-cols-4 gap-3" id="gallery"></div>
             </div>
 
-            <!-- 공유 버튼 -->
-            <button onclick="alert('카카오톡으로 공유하세요 💕')" 
-                    class="w-full py-5 bg-gradient-to-r from-sky-500 to-pink-500 text-white rounded-3xl font-semibold text-lg flex items-center justify-center gap-3 shadow-lg">
-                <i class="fas fa-share-alt"></i>
-                초대장 링크 공유하기
-            </button>
+            <!-- 공유 버튼 + QR코드 버튼 -->
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="shareInvitation()" 
+                        class="py-5 bg-gradient-to-r from-sky-500 to-pink-500 text-white rounded-3xl font-semibold flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fas fa-share-alt"></i>
+                    초대장 공유하기
+                </button>
+                
+                <button onclick="showQRCode()" 
+                        class="py-5 bg-white border-2 border-slate-300 text-slate-700 rounded-3xl font-semibold flex items-center justify-center gap-2 shadow-lg hover:bg-slate-50">
+                    <span class="text-xl">📱</span>
+                    QR코드 보기
+                </button>
+            </div>
         </div>
     </div>
 
@@ -98,6 +104,17 @@
     <div id="modal" class="hidden fixed inset-0 bg-black/90 z-[9999] items-center justify-center" onclick="if(event.target===this)closeModal()">
         <span onclick="closeModal()" class="absolute top-6 right-6 text-white text-5xl cursor-pointer">×</span>
         <img id="modal-image" class="max-w-[90%] max-h-[90%] rounded-3xl" alt="">
+    </div>
+
+    <!-- QR코드 모달 -->
+    <div id="qrModal" class="hidden fixed inset-0 bg-black/90 z-[10000] items-center justify-center" onclick="if(event.target===this)closeQRModal()">
+        <div class="bg-white rounded-3xl p-8 max-w-[280px] w-full mx-4 text-center">
+            <p class="text-slate-600 mb-4 font-medium">초대장 QR코드</p>
+            <div id="qrcode" class="mx-auto"></div>
+            <p class="text-xs text-slate-400 mt-6">핸드폰으로 스캔하면 바로 초대장으로 이동합니다</p>
+            <button onclick="closeQRModal()" 
+                    class="mt-6 w-full py-3 text-slate-500 font-medium border border-slate-200 rounded-2xl">닫기</button>
+        </div>
     </div>
 
     <footer class="text-center text-xs text-slate-400 py-8">
@@ -129,11 +146,63 @@
                 container.appendChild(img);
             });
         }
+
         function closeModal() {
             const modal = document.getElementById('modal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
+
+        // 공유 기능
+        async function shareInvitation() {
+            const shareData = {
+                title: '손태국 금호읍장님 퇴임식 초대장',
+                text: '2026년 6월 18일(목) 오전 10시\n금호읍 행정복지센터 3층 대회의실\n초대합니다 💕',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                    return;
+                } catch (err) {}
+            }
+
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                alert('✅ 초대장 링크가 복사되었습니다!\n카카오톡에 붙여넣기 해주세요.');
+            } catch (err) {
+                alert('링크 복사 실패\n주소: ' + window.location.href);
+            }
+        }
+
+        // QR코드 표시
+        function showQRCode() {
+            const qrModal = document.getElementById('qrModal');
+            const qrcodeContainer = document.getElementById('qrcode');
+            
+            // 기존 QR코드 지우고 새로 생성
+            qrcodeContainer.innerHTML = '';
+            
+            new QRCode(qrcodeContainer, {
+                text: window.location.href,
+                width: 220,
+                height: 220,
+                colorDark: "#1e2937",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            qrModal.classList.remove('hidden');
+            qrModal.classList.add('flex');
+        }
+
+        function closeQRModal() {
+            const qrModal = document.getElementById('qrModal');
+            qrModal.classList.add('hidden');
+            qrModal.classList.remove('flex');
+        }
+
         window.onload = createGallery;
     </script>
 </body>
