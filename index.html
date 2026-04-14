@@ -44,25 +44,34 @@
             <div class="bg-white rounded-3xl shadow-xl p-8 text-center">
                 <span class="px-6 py-2 bg-gradient-to-r from-sky-400 to-pink-400 text-white text-sm font-medium rounded-3xl">2026년 6월 18일 (목요일)</span>
                 <p class="text-6xl font-bold text-sky-600 mt-5">10:00</p>
-                <p class="text-slate-500 mt-1">오전 • 금호읍 행정복지센터 대강당</p>
+                <p class="text-slate-500 mt-1">오전 • 금호읍 행정복지센터 3층 대회의실</p>
             </div>
         </div>
 
         <!-- 내용 -->
         <div class="px-6 pt-8 pb-12 space-y-8">
 
-            <!-- 장소 -->
+            <!-- 장소 + 카카오맵 -->
             <div class="bg-white rounded-3xl p-7 shadow">
                 <div class="flex items-center gap-4 mb-5">
                     <span class="text-3xl">📍</span>
                     <div class="flex-1">
-                        <p class="font-semibold">금호읍 행정복지센터 대강당</p>
+                        <p class="font-semibold">금호읍 행정복지센터 3층 대회의실</p>
                         <p class="text-slate-600">경상북도 영천시 금호읍 금호로 153</p>
                     </div>
                 </div>
+                
+                <!-- 카카오맵 -->
                 <div class="rounded-2xl overflow-hidden border border-slate-100">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.2!2d128.8985!3d36.0123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565f0b0b0b0b0b0%3A0x1234567890abcdef!2z6rSR7KSA7Yq47YOg7Iuc6rSR7JyV7ISx7Iuc!5e0!3m2!1sko!2skr!4v1713000000000" 
-                            width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe 
+                        src="https://map.kakao.com/embed?center=128.8985,36.0123&level=3&q=%EA%B8%88%ED%98%B8%EC%9D%8D+%ED%96%89%EC%A0%95%EB%B3%B5%EC%A7%80%EC%84%BC%ED%84%B0"
+                        width="100%" 
+                        height="220" 
+                        frameborder="0" 
+                        scrolling="no"
+                        style="border:0;"
+                        allowfullscreen="">
+                    </iframe>
                 </div>
             </div>
 
@@ -84,4 +93,57 @@
 
             <!-- 공유 버튼 -->
             <button onclick="alert('카카오톡으로 공유하세요 💕')" 
-                    class="w-full py-
+                    class="w-full py-5 bg-gradient-to-r from-sky-500 to-pink-500 text-white rounded-3xl font-semibold text-lg flex items-center justify-center gap-3 shadow-lg">
+                <i class="fas fa-share-alt"></i>
+                초대장 링크 공유하기
+            </button>
+        </div>
+    </div>
+
+    <!-- 갤러리 모달 -->
+    <div id="modal" class="hidden fixed inset-0 bg-black/90 z-[9999] items-center justify-center" onclick="if(event.target===this)closeModal()">
+        <span onclick="closeModal()" class="absolute top-6 right-6 text-white text-5xl cursor-pointer">×</span>
+        <img id="modal-image" class="max-w-[90%] max-h-[90%] rounded-3xl" alt="">
+    </div>
+
+    <footer class="text-center text-xs text-slate-400 py-8">
+        © 2026 손태국 금호읍장님 퇴임식 모바일 초대장
+    </footer>
+
+    <script>
+        tailwind.config = { content: [] };
+
+        // 배경음악
+        const music = document.getElementById('bgMusic');
+        document.body.addEventListener('touchstart', () => {
+            if (music.paused) music.play();
+        }, { once: true });
+
+        // 갤러리 (필요한 만큼 gallery-1.jpg ~ gallery-4.jpg 등으로 변경)
+        const photos = ["gallery-1.jpg", "gallery-2.jpg", "gallery-3.jpg", "gallery-4.jpg"];
+
+        function createGallery() {
+            const container = document.getElementById('gallery');
+            photos.forEach(filename => {
+                const img = document.createElement('img');
+                img.src = filename;
+                img.className = "w-full aspect-square object-cover rounded-2xl cursor-pointer hover:scale-105 transition-transform";
+                img.onclick = () => {
+                    document.getElementById('modal-image').src = filename;
+                    document.getElementById('modal').classList.remove('hidden');
+                    document.getElementById('modal').classList.add('flex');
+                };
+                container.appendChild(img);
+            });
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        window.onload = createGallery;
+    </script>
+</body>
+</html>
