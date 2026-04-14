@@ -9,22 +9,24 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans KR', system-ui, sans-serif; }
         .photo { width: 100%; display: block; box-shadow: 0 10px 15px -3px rgb(165 243 252); }
-        
-        .title-area {
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-            padding: 40px 24px 30px;
-        }
     </style>
 </head>
 <body class="bg-sky-50">
+
+    <!-- 배경음악 -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="bg-music.mp3" type="audio/mpeg">
+        <source src="bg-music.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
 
     <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl overflow-hidden">
 
         <!-- 메인 사진 -->
         <img src="main-photo.jpg" alt="손태국 금호읍장님" class="photo">
 
-        <!-- 예쁘게 디자인한 제목 영역 -->
-        <div class="title-area text-center">
+        <!-- 제목 영역 -->
+        <div class="text-center" style="background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%); padding: 40px 24px 30px;">
             <div class="flex justify-center gap-3 mb-4">
                 <span class="text-4xl">🌸</span>
                 <span class="text-4xl">🌼</span>
@@ -37,7 +39,7 @@
             <p class="mt-6 text-sky-600 text-lg font-medium">따뜻한 마음으로 함께해 주세요 💕</p>
         </div>
 
-        <!-- 날짜 카드 (더 예쁘게) -->
+        <!-- 날짜 -->
         <div class="px-6 -mt-6 relative z-10">
             <div class="bg-white rounded-3xl shadow-xl p-8 text-center">
                 <span class="px-6 py-2 bg-gradient-to-r from-sky-400 to-pink-400 text-white text-sm font-medium rounded-3xl">2026년 6월 18일 (목요일)</span>
@@ -46,7 +48,7 @@
             </div>
         </div>
 
-        <!-- 나머지 내용 -->
+        <!-- 내용 -->
         <div class="px-6 pt-8 pb-12 space-y-8">
 
             <!-- 장소 -->
@@ -77,55 +79,9 @@
             <!-- 갤러리 -->
             <div>
                 <p class="text-center text-slate-500 text-sm mb-4">📸 함께한 소중한 순간들</p>
-                <div class="gallery-grid grid grid-cols-4 gap-3" id="gallery"></div>
+                <div class="grid grid-cols-4 gap-3" id="gallery"></div>
             </div>
 
             <!-- 공유 버튼 -->
             <button onclick="alert('카카오톡으로 공유하세요 💕')" 
-                    class="w-full py-5 bg-gradient-to-r from-sky-500 to-pink-500 text-white rounded-3xl font-semibold text-lg flex items-center justify-center gap-3 shadow-lg">
-                <i class="fas fa-share-alt"></i>
-                초대장 링크 공유하기
-            </button>
-        </div>
-    </div>
-
-    <!-- 갤러리 모달 (이전과 동일) -->
-    <div id="modal" class="modal hidden fixed inset-0 bg-black/90 z-[9999] items-center justify-center" onclick="if(event.target===this)closeModal()">
-        <span onclick="closeModal()" class="absolute top-6 right-6 text-white text-5xl cursor-pointer">×</span>
-        <img id="modal-image" class="max-w-[90%] max-h-[90%] rounded-3xl" alt="">
-    </div>
-
-    <footer class="text-center text-xs text-slate-400 py-8">
-        © 2026 손태국 금호읍장님 퇴임식 모바일 초대장
-    </footer>
-
-    <script>
-        tailwind.config = { content: [] };
-
-        const photos = ["gallery-1.JPG", "gallery-2.JPG", "gallery-3.JPG", "gallery-4.JPG"];
-
-        function createGallery() {
-            const container = document.getElementById('gallery');
-            photos.forEach((filename, i) => {
-                const img = document.createElement('img');
-                img.src = filename;
-                img.className = "w-full aspect-square object-cover rounded-2xl cursor-pointer hover:scale-105 transition-transform";
-                img.onclick = () => {
-                    document.getElementById('modal-image').src = filename;
-                    document.getElementById('modal').classList.remove('hidden');
-                    document.getElementById('modal').classList.add('flex');
-                };
-                container.appendChild(img);
-            });
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        window.onload = createGallery;
-    </script>
-</body>
-</html>
+                    class="w-full py-
