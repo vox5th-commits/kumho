@@ -5,65 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>손태국 금호읍장님 퇴임식에 초대합니다 🌸</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
         body { font-family: 'Noto Sans KR', system-ui, sans-serif; }
-        .hero-img {
-            max-height: 65vh;
-            object-fit: cover;
-            box-shadow: 0 25px 50px -12px rgb(165 243 252);
-        }
-        @media (max-width: 640px) {
-            .hero-img { max-height: 70vh; }
+        .photo {
+            width: 100%;
+            display: block;
+            box-shadow: 0 10px 15px -3px rgb(165 243 252);
         }
     </style>
 </head>
-<body class="bg-sky-50 text-slate-800">
+<body class="bg-sky-50">
 
     <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl overflow-hidden">
 
-        <!-- 메인 사진 -->
-        <div class="relative">
-            <img src="main-photo.jpg" 
-                 alt="손태국 금호읍장님" 
-                 class="hero-img w-full block">
-            
-            <!-- 오버레이 타이틀 -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50 flex flex-col items-center justify-end pb-10 text-white text-center">
-                <div class="text-5xl font-bold tracking-tighter leading-none mb-1">퇴임식에</div>
-                <div class="text-6xl font-bold tracking-tighter drop-shadow-md">초대합니다</div>
-                
-                <div class="flex gap-6 mt-8 text-5xl">
-                    <span>🌸</span>
-                    <span>🌼</span>
-                    <span>🌺</span>
-                </div>
-            </div>
-        </div>
+        <!-- 사진 전체 (아무것도 가리지 않음) -->
+        <img src="main-photo.jpg" alt="손태국 금호읍장님" class="photo">
 
-        <!-- 내용 -->
-        <div class="px-6 pb-12 pt-2 space-y-8">
-            
+        <!-- 내용 전부 사진 아래 -->
+        <div class="px-6 pt-8 pb-12 space-y-8">
+
+            <!-- 제목 -->
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 text-sky-600 text-sm font-medium mb-3">
+                    <span>🌸</span> 초대합니다 <span>🌸</span>
+                </div>
+                <h1 class="text-4xl font-bold tracking-tighter leading-none">
+                    손태국 금호읍장님<br>
+                    퇴임식에 초대합니다
+                </h1>
+            </div>
+
             <!-- 날짜 -->
             <div class="bg-white rounded-3xl shadow p-7 text-center">
-                <div class="flex justify-center mb-2">
-                    <span class="px-4 py-1 bg-sky-100 text-sky-600 text-sm font-medium rounded-3xl">2026년 6월 18일 (목요일)</span>
-                </div>
-                <p class="text-5xl font-bold text-sky-600 mt-3">오전 10:00</p>
-                <p class="text-slate-600 mt-1">금호읍 행정복지센터 대강당</p>
+                <span class="px-5 py-1 bg-sky-100 text-sky-600 text-sm font-medium rounded-3xl">2026년 6월 18일 (목요일)</span>
+                <p class="text-5xl font-bold text-sky-600 mt-4">오전 10:00</p>
+                <p class="text-slate-600 mt-2">금호읍 행정복지센터 대강당</p>
             </div>
 
             <!-- 장소 -->
             <div class="bg-white rounded-3xl p-7 shadow">
                 <div class="flex items-center gap-4 mb-5">
                     <span class="text-3xl">📍</span>
-                    <div>
-                        <p class="font-semibold text-lg">금호읍 행정복지센터 대강당</p>
+                    <div class="flex-1">
+                        <p class="font-semibold">금호읍 행정복지센터 대강당</p>
                         <p class="text-slate-600">경상북도 영천시 금호읍 금호로 153</p>
                     </div>
                 </div>
-                <div class="rounded-2xl overflow-hidden border">
+                <div class="rounded-2xl overflow-hidden border border-slate-100">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3231.2!2d128.8985!3d36.0123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3565f0b0b0b0b0b0%3A0x1234567890abcdef!2z6rSR7KSA7Yq47YOg7Iuc6rSR7JyV7ISx7Iuc!5e0!3m2!1sko!2skr!4v1713000000000" 
                             width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
@@ -86,7 +75,6 @@
                 초대장 링크 공유하기
             </button>
         </div>
-
     </div>
 
     <footer class="text-center text-xs text-slate-400 py-8">
