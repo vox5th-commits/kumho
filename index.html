@@ -17,7 +17,6 @@
     <audio id="bgMusic" loop autoplay>
         <source src="bg-music.mp3" type="audio/mpeg">
         <source src="bg-music.m4a" type="audio/mp4">
-        Your browser does not support the audio element.
     </audio>
 
     <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl overflow-hidden">
@@ -51,7 +50,7 @@
         <!-- 내용 -->
         <div class="px-6 pt-8 pb-12 space-y-8">
 
-            <!-- 장소 + 카카오맵 -->
+            <!-- 장소 -->
             <div class="bg-white rounded-3xl p-7 shadow">
                 <div class="flex items-center gap-4 mb-5">
                     <span class="text-3xl">📍</span>
@@ -60,19 +59,14 @@
                         <p class="text-slate-600">경상북도 영천시 금호읍 금호로 153</p>
                     </div>
                 </div>
-                
-                <!-- 카카오맵 -->
-                <div class="rounded-2xl overflow-hidden border border-slate-100">
-                    <iframe 
-                        src="https://map.kakao.com/?q=%EA%B8%88%ED%98%B8%EC%9D%8D+%ED%96%89%EC%A0%95%EB%B3%B5%EC%A7%80%EC%84%BC%ED%84%B0"
-                        width="100%" 
-                        height="220" 
-                        frameborder="0" 
-                        scrolling="no"
-                        style="border:0;"
-                        allowfullscreen="">
-                    </iframe>
-                </div>
+
+                <!-- 카카오맵 버튼 (iframe 제거) -->
+                <a href="https://map.kakao.com/?q=%EA%B8%88%ED%98%B8%EC%9D%8D+%ED%96%89%EC%A0%95%EB%B3%B5%EC%A7%80%EC%84%BC%ED%84%B0" 
+                   target="_blank"
+                   class="block w-full bg-[#FEE500] hover:bg-[#FDD700] text-black font-semibold py-4 rounded-2xl text-center flex items-center justify-center gap-2 shadow-md">
+                    <span class="text-xl">🗺️</span>
+                    카카오맵 앱으로 위치 보기
+                </a>
             </div>
 
             <!-- 메시지 -->
@@ -119,9 +113,8 @@
             if (music.paused) music.play();
         }, { once: true });
 
-        // 갤러리 (필요한 만큼 gallery-1.jpg ~ gallery-4.jpg 등으로 변경)
+        // 갤러리
         const photos = ["gallery-1.JPG", "gallery-2.JPG", "gallery-3.JPG", "gallery-4.JPG"];
-
         function createGallery() {
             const container = document.getElementById('gallery');
             photos.forEach(filename => {
@@ -136,13 +129,11 @@
                 container.appendChild(img);
             });
         }
-
         function closeModal() {
             const modal = document.getElementById('modal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
-
         window.onload = createGallery;
     </script>
 </body>
