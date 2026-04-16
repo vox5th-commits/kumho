@@ -197,3 +197,57 @@
     </script>
 </body>
 </html>
+// 공유 기능
+        async function shareInvitation() {
+            const shareData = {
+                title: '손태국 금호읍장님 퇴임식 초대장',
+                text: '2026년 6월 18일(목) 오전 10시\n금호읍 행정복지센터 3층 대회의실\n초대합니다 💕',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                    return;
+                } catch (err) {}
+            }
+
+            try {
+                await navigator.clipboard.writeText(window.location.href);
+                alert('✅ 초대장 링크가 복사되었습니다!\n카카오톡에 붙여넣기 해주세요.');
+            } catch (err) {
+                alert('링크 복사 실패\n주소: ' + window.location.href);
+            }
+        }
+
+        // QR코드 표시
+        function showQRCode() {
+            const qrModal = document.getElementById('qrModal');
+            const qrcodeContainer = document.getElementById('qrcode');
+            
+            // 기존 QR코드 지우고 새로 생성
+            qrcodeContainer.innerHTML = '';
+            
+            new QRCode(qrcodeContainer, {
+                text: window.location.href,
+                width: 220,
+                height: 220,
+                colorDark: "#1e2937",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+
+            qrModal.classList.remove('hidden');
+            qrModal.classList.add('flex');
+        }
+
+        function closeQRModal() {
+            const qrModal = document.getElementById('qrModal');
+            qrModal.classList.add('hidden');
+            qrModal.classList.remove('flex');
+        }
+
+        window.onload = createGallery;
+    </script>
+</body>
+</html>
