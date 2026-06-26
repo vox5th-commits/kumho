@@ -3,323 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>영천시장 김병삼 취임식에 초대합니다</title>
+    <title>제11대 영천시장 김병삼 취임식 초대장</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
-        
-        body { 
-            font-family: 'Noto Sans KR', system-ui, sans-serif; 
-        }
-        
-        .title-serif {
-            font-family: 'Noto Serif KR', 'Noto Sans KR', serif;
-            letter-spacing: -0.02em;
+        :root {
+            --primary: #0A1D37; /* 신뢰의 네이비 */
+            --accent: #C5A358;  /* 명예의 골드 */
+            --bg: #F8F9FA;
         }
 
-        .photo { 
-            width: 100%; 
-            display: block; 
-            box-shadow: 0 10px 15px -3px rgb(15 23 42 / 0.1); 
-        }
-        
-        .gallery-img { 
-            transition: all 0.3s ease; 
-        }
-        
-        .gallery-img:hover { 
-            transform: scale(1.03); 
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: var(--primary);
+            color: #333;
+            word-break: keep-all;
         }
 
-        .gold-accent {
-            color: #c9a961;
+        .serif { font-family: 'Noto Serif KR', serif; }
+
+        /* 고급스러운 그라데이션 오버레이 */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(10,29,55,0) 60%, rgba(10,29,55,1) 100%);
         }
 
-        .section-card {
-            background: white;
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgb(15 23 42 / 0.05), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .elegant-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, #c9a961, transparent);
-            max-width: 120px;
-            margin: 1.25rem auto;
+        .gold-border {
+            border-left: 2px solid var(--accent);
         }
 
-        .navy-text {
-            color: #0f172a;
+        /* 버튼 애니메이션 */
+        .btn-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .btn-hover:active { transform: scale(0.95); }
     </style>
 </head>
-<body class="bg-[#f9f5eb] relative">
+<body class="antialiased">
 
-    <audio id="bgMusic" loop>
-        <source src="bg-music.mp3" type="audio/mpeg">
-        <source src="bg-music.m4a" type="audio/mp4">
-    </audio>
-
-    <button onclick="toggleMusic()" id="musicBtn" 
-            class="fixed bottom-6 right-6 bg-white/90 w-11 h-11 rounded-full shadow-lg z-40 flex items-center justify-center text-lg border border-[#c9a961]/30 text-[#0f172a]">
-        <i class="fas fa-music"></i>
-    </button>
-
-    <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl overflow-hidden">
-
-        <!-- 메인 사진 -->
-        <img src="main-photo.png" alt="김병삼 영천시장" class="photo">
-
-        <!-- 헤더 섹션 -->
-        <div class="text-center px-6 pt-10 pb-8 bg-[#f9f5eb]">
-            <div class="elegant-divider"></div>
+    <div class="max-w-md mx-auto bg-white min-h-screen relative shadow-2xl">
+        
+        <section class="relative h-[85vh] overflow-hidden bg-[#0A1D37]">
+            <div class="absolute inset-0 bg-cover bg-center opacity-80" 
+                 style="background-image: url('main-photo.jpg');"></div>
+            <div class="absolute inset-0 hero-overlay"></div>
             
-            <h1 class="title-serif text-4xl font-bold tracking-tighter leading-tight navy-text">
-                영천시장 김병삼<br>
-                취임식에 초대합니다
-            </h1>
-            
-            <p class="mt-5 text-[#475569] text-[15px] font-medium tracking-wide">
-                정중히 초대합니다
-            </p>
-            
-            <div class="elegant-divider"></div>
-        </div>
-
-        <!-- 날짜/시간 카드 -->
-        <div class="px-6 -mt-4 relative z-10">
-            <div class="section-card p-8 text-center border border-[#c9a961]/10">
-                <div class="inline-flex items-center gap-2 px-5 py-1.5 bg-[#0f172a] text-[#c9a961] text-sm font-medium rounded-full tracking-wider">
-                    <i class="fas fa-calendar-alt mr-1.5"></i>
-                    2026년 7월 1일 (수요일)
-                </div>
-                
-                <p class="font-bold mt-6">
-                    <span class="text-3xl text-[#475569]">오전</span>
-                    <span class="text-6xl navy-text ml-1">10:00</span>
+            <div class="absolute bottom-12 left-0 right-0 px-8 text-white" data-aos="fade-up">
+                <p class="text-accent font-medium tracking-[0.3em] mb-2">INAUGURATION</p>
+                <h1 class="text-4xl font-light leading-tight mb-4">
+                    새로운 영천,<br>
+                    <span class="font-bold">시민과 함께</span><br>
+                    비상하겠습니다
+                </h1>
+                <div class="h-[1px] w-12 bg-accent mb-6"></div>
+                <p class="text-sm opacity-80 leading-relaxed font-light">
+                    제11대 영천시장 김병삼 취임식
                 </p>
-                
-                <p class="text-[#475569] mt-2 text-[15px]">영천시청 본관 대회의실</p>
             </div>
-        </div>
+        </section>
 
-        <div class="px-6 pt-9 pb-10 space-y-7">
+        <section class="px-8 py-20 bg-white">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <i class="fa-solid fa-quote-left text-accent opacity-30 text-3xl mb-4"></i>
+                <h2 class="text-xl font-bold mb-8 text-[#0A1D37]">정중히 초대합니다</h2>
+                <p class="text-[16px] leading-[1.8] text-gray-600 font-light">
+                    별빛 가득한 영천의 새로운 내일을 위해<br>
+                    시민 여러분의 소중한 목소리를 가슴에 담고<br>
+                    첫걸음을 내딛고자 합니다.<br><br>
+                    그 시작의 자리에 함께 하시어<br>
+                    자리를 빛내주시면 감사하겠습니다.
+                </p>
+                <p class="mt-12 text-lg font-medium text-[#0A1D37]">영천시장 당선인 <span class="text-2xl font-bold ml-1">김병삼</span> 올림</p>
+            </div>
+        </section>
 
-            <!-- 장소 정보 -->
-            <div class="section-card p-7 border border-[#c9a961]/10">
-                <div class="flex items-start gap-4">
-                    <div class="mt-1">
-                        <i class="fas fa-map-marker-alt text-2xl gold-accent"></i>
+        <section class="px-6 py-10 bg-[#F1F4F8]">
+            <div class="glass-card rounded-[2rem] p-10 shadow-xl -mt-20 relative z-20" data-aos="zoom-in">
+                <div class="space-y-8">
+                    <div class="flex items-center gap-5">
+                        <div class="w-12 h-12 rounded-full bg-[#0A1D37] flex items-center justify-center text-white text-lg">
+                            <i class="fa-regular fa-calendar"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Date & Time</p>
+                            <p class="text-lg font-bold text-[#0A1D37]">2026. 07. 01. WED</p>
+                            <p class="text-md text-gray-600">오전 10시 00분</p>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <p class="font-semibold navy-text text-[15px]">영천시청 본관 대회의실</p>
-                        <p class="text-[#64748b] text-sm mt-0.5">경상북도 영천시 시청로 1</p>
-                        
-                        <a href="https://map.kakao.com/?q=영천시청" 
-                           target="_blank"
-                           class="mt-4 block w-full bg-[#c9a961] hover:bg-[#b8975e] transition-colors text-[#0f172a] font-semibold py-3.5 rounded-2xl text-center text-sm flex items-center justify-center gap-2 shadow-sm">
-                            <i class="fas fa-map"></i>
-                            <span>카카오맵으로 위치 보기</span>
-                        </a>
+
+                    <div class="flex items-center gap-5">
+                        <div class="w-12 h-12 rounded-full bg-[#0A1D37] flex items-center justify-center text-white text-lg">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Location</p>
+                            <p class="text-lg font-bold text-[#0A1D37]">영천시청 본관 대회의실</p>
+                            <p class="text-md text-gray-600 text-sm">경상북도 영천시 시청로 1</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 문의처 -->
-            <div class="section-card p-7 text-center border border-[#c9a961]/10">
-                <p class="text-sm text-[#64748b] mb-2 tracking-wider">문의처</p>
-                <a href="tel:054-330-6000" class="block">
-                    <p class="text-3xl font-bold navy-text hover:text-[#1e3a5f] transition-colors">054-330-6000</p>
-                </a>
-                <p class="text-[#64748b] mt-1 text-sm">영천시청</p>
-                <p class="text-xs text-[#94a3b8] mt-4">(평일 09:00 ~ 18:00)</p>
+                <div class="mt-10 space-y-3">
+                    <a href="https://map.kakao.com/?q=영천시청" class="btn-hover w-full py-4 bg-[#0A1D37] text-white rounded-xl font-medium text-sm flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-map"></i> 카카오맵 길찾기
+                    </a>
+                    <a href="tel:0543306000" class="btn-hover w-full py-4 border border-gray-200 text-gray-600 rounded-xl font-medium text-sm flex items-center justify-center gap-2 bg-white">
+                        <i class="fa-solid fa-phone"></i> 행사 문의하기
+                    </a>
+                </div>
             </div>
+        </section>
 
-            <!-- 갤러리 -->
-            <div>
-                <p class="text-center text-[#64748b] text-xs tracking-[1.5px] mb-4 font-medium">함께하는 소중한 순간들</p>
-                <div class="grid grid-cols-4 gap-2.5" id="gallery"></div>
+        <section class="px-8 py-20 bg-white overflow-hidden">
+            <h3 class="text-xs tracking-[0.4em] text-accent font-bold mb-10" data-aos="fade-right">CITY VISION</h3>
+            <div class="space-y-12">
+                <div class="gold-border pl-6" data-aos="fade-left" data-aos-delay="100">
+                    <h4 class="text-lg font-bold text-[#0A1D37] mb-2">시민 중심의 혁신 행정</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">현장의 목소리를 듣고 작은 소리도 놓치지 않는 소통하는 시장이 되겠습니다.</p>
+                </div>
+                <div class="gold-border pl-6" data-aos="fade-left" data-aos-delay="200">
+                    <h4 class="text-lg font-bold text-[#0A1D37] mb-2">활기찬 미래 경제 도시</h4>
+                    <p class="text-sm text-gray-500 leading-relaxed">일자리가 넘쳐나고 기업이 찾아오는 역동적인 영천을 만들겠습니다.</p>
+                </div>
             </div>
+        </section>
 
-            <!-- 버튼 영역 -->
-            <div class="grid grid-cols-2 gap-3 pt-2">
-                <button onclick="shareInvitation()" 
-                        class="py-4 bg-[#0f172a] hover:bg-[#1e2937] transition-all text-white rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 shadow-md">
-                    <i class="fas fa-share-alt"></i>
-                    <span>공유하기</span>
+        <section class="px-8 py-16 bg-[#0A1D37] text-center">
+            <h4 class="text-white opacity-40 text-[10px] tracking-[0.5em] mb-8">SHARE THE MOMENT</h4>
+            <div class="flex justify-center gap-4">
+                <button onclick="share()" class="w-14 h-14 rounded-full bg-white/10 text-white flex items-center justify-center text-xl hover:bg-accent transition-colors">
+                    <i class="fa-solid fa-share-nodes"></i>
                 </button>
-                <button onclick="showQRCode()" 
-                        class="py-4 bg-white border-2 border-[#c9a961] text-[#0f172a] hover:bg-[#f9f5eb] transition-all rounded-2xl font-semibold text-sm flex items-center justify-center gap-2">
-                    <i class="fas fa-qrcode"></i>
-                    <span>QR코드 보기</span>
+                <button onclick="copyLink()" class="w-14 h-14 rounded-full bg-white/10 text-white flex items-center justify-center text-xl hover:bg-accent transition-colors">
+                    <i class="fa-solid fa-link"></i>
+                </button>
+                <button onclick="alert('캘린더에 일정이 등록되었습니다.')" class="w-14 h-14 rounded-full bg-white/10 text-white flex items-center justify-center text-xl hover:bg-accent transition-colors">
+                    <i class="fa-regular fa-calendar-check"></i>
                 </button>
             </div>
-        </div>
-    </div>
+            <p class="mt-20 text-[10px] text-white/30 tracking-widest uppercase">© 2026 Youngcheon City. All Rights Reserved.</p>
+        </section>
 
-    <!-- 이미지 모달 -->
-    <div id="modal" class="hidden fixed inset-0 bg-black/95 z-[9999] items-center justify-center">
-        <div class="relative w-full max-w-lg mx-4">
-            <span onclick="closeModal()" class="absolute -top-12 right-0 text-white text-5xl cursor-pointer z-10 font-light">×</span>
-            
-            <div class="relative">
-                <img id="modal-image" class="w-full rounded-3xl shadow-2xl" alt="">
-                <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center text-3xl transition-all">‹</button>
-                <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center text-3xl transition-all">›</button>
-            </div>
-            <div class="text-center text-white/60 text-xs mt-4 tracking-widest" id="image-counter">1 / 8</div>
-        </div>
     </div>
-
-    <!-- QR 모달 -->
-    <div id="qrModal" class="hidden fixed inset-0 bg-black/90 z-[10000] items-center justify-center" onclick="if(event.target===this)closeQRModal()">
-        <div class="bg-white rounded-3xl p-8 max-w-[280px] w-full mx-4 text-center shadow-2xl">
-            <p class="text-[#475569] mb-5 font-medium tracking-wide">초대장 QR코드</p>
-            <div id="qrcode" class="mx-auto"></div>
-            <p class="text-xs text-[#94a3b8] mt-6 leading-relaxed">핸드폰으로 스캔하면<br>바로 초대장으로 이동합니다</p>
-            <button onclick="closeQRModal()" 
-                    class="mt-6 w-full py-3 text-[#475569] font-medium border border-[#e2e8f0] hover:bg-[#f8fafc] rounded-2xl text-sm transition-colors">닫기</button>
-        </div>
-    </div>
-
-    <footer class="text-center text-[10px] text-[#94a3b8] py-8 tracking-widest">
-        © 2026 영천시장 김병삼 취임식 모바일 초대장
-    </footer>
 
     <script>
-        tailwind.config = { content: [] };
+        // 애니메이션 초기화
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
 
-        // 배경음악 제어
-        const music = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicBtn');
-        let isMusicPlaying = false;
-
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                music.pause();
-                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
-            } else {
-                music.play().catch(e => console.log("Audio play failed:", e));
-                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            }
-            isMusicPlaying = !isMusicPlaying;
-        }
-
-        // 첫 터치 시 음악 재생 (선택)
-        document.body.addEventListener('touchstart', () => { 
-            if (music.paused && !isMusicPlaying) { 
-                music.play().catch(e => console.log("Audio play failed:", e)); 
-                isMusicPlaying = true;
-                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            } 
-        }, { once: true });
-
-        // 갤러리 (기존 사진 파일명 유지 - 사용자님께서 사진 교체 가능)
-        const photos = [
-            "gallery-1.JPG", "gallery-2.jpg", "gallery-3.jpg", "gallery-4.JPG",
-            "gallery-5.jpg", "gallery-6.jpg", "gallery-7.jpg", "gallery-8.jpg"
-        ];
-        let currentIndex = 0;
-
-        function createGallery() {
-            const container = document.getElementById('gallery');
-            photos.forEach((filename, index) => {
-                const img = document.createElement('img');
-                img.src = filename;
-                img.className = "gallery-img w-full aspect-square object-cover rounded-xl cursor-pointer border border-[#e2e8f0]";
-                img.loading = "lazy";
-                img.onclick = () => openModal(index);
-                container.appendChild(img);
-            });
-        }
-
-        function openModal(index) {
-            currentIndex = index;
-            updateModalImage();
-            const modal = document.getElementById('modal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function updateModalImage() {
-            document.getElementById('modal-image').src = photos[currentIndex];
-            document.getElementById('image-counter').textContent = `${currentIndex + 1} / 8`;
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = 'auto';
-        }
-
-        function nextImage() { currentIndex = (currentIndex + 1) % photos.length; updateModalImage(); }
-        function prevImage() { currentIndex = (currentIndex - 1 + photos.length) % photos.length; updateModalImage(); }
-
-        // 스와이프 지원
-        let touchStartX = 0;
-        const modalImg = document.getElementById('modal-image');
-        if (modalImg) {
-            modalImg.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
-            modalImg.addEventListener('touchend', e => {
-                const touchEndX = e.changedTouches[0].screenX;
-                if (touchEndX < touchStartX - 50) nextImage();
-                if (touchEndX > touchStartX + 50) prevImage();
-            });
-        }
-
-        // 공유하기
-        async function shareInvitation() {
-            const shareData = {
-                title: '영천시장 김병삼 취임식 초대장',
-                text: '2026년 7월 1일(수) 오전 10시
-영천시청 본관 대회의실
-정중히 초대합니다',
-                url: window.location.href
-            };
-
+        // 공유 기능
+        function share() {
             if (navigator.share) {
-                try {
-                    await navigator.share(shareData);
-                    return; 
-                } catch (err) {}
+                navigator.share({
+                    title: '영천시장 김병삼 취임식 초대장',
+                    url: window.location.href
+                });
             } else {
-                try {
-                    await navigator.clipboard.writeText(window.location.href);
-                    alert('✅ 초대장 링크가 볳사되었습니다.\n카카오톡에 붙여넣기 해주세요.');
-                } catch {
-                    alert('링크 볳사 실패\n주소: ' + window.location.href);
-                }
+                copyLink();
             }
         }
 
-        // QR코드
-        function showQRCode() {
-            const qrModal = document.getElementById('qrModal');
-            const container = document.getElementById('qrcode');
-            container.innerHTML = '';
-            new QRCode(container, {
-                text: window.location.href,
-                width: 200,
-                height: 200,
-                colorDark: "#0f172a",
-                colorLight: "#ffffff"
-            });
-            qrModal.classList.remove('hidden');
-            qrModal.classList.add('flex');
+        // 링크 복사
+        function copyLink() {
+            const el = document.createElement('textarea');
+            el.value = window.location.href;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+            alert('초대장 링크가 복사되었습니다.');
         }
-        
-        function closeQRModal() {
-            const qrModal = document.getElementById('qrModal');
-            qrModal.classList.add('hidden');
-            qrModal.classList.remove('flex');
-        }
-
-        window.onload = createGallery;
     </script>
 </body>
 </html>
