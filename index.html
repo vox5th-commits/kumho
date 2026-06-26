@@ -3,135 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>손태국 금호읍장님 퇴임식에 초대합니다 🌸</title>
+    <title>영천시장 김병삼 취임식에 초대합니다</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
-        body { font-family: 'Noto Sans KR', system-ui, sans-serif; }
-        .photo { width: 100%; display: block; box-shadow: 0 10px 15px -3px rgb(165 243 252); }
-        .gallery-img { transition: all 0.3s; }
-        .gallery-img:hover { transform: scale(1.05); }
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+        
+        body { 
+            font-family: 'Noto Sans KR', system-ui, sans-serif; 
+        }
+        
+        .title-serif {
+            font-family: 'Noto Serif KR', 'Noto Sans KR', serif;
+            letter-spacing: -0.02em;
+        }
+
+        .photo { 
+            width: 100%; 
+            display: block; 
+            box-shadow: 0 10px 15px -3px rgb(15 23 42 / 0.1); 
+        }
+        
+        .gallery-img { 
+            transition: all 0.3s ease; 
+        }
+        
+        .gallery-img:hover { 
+            transform: scale(1.03); 
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .gold-accent {
+            color: #c9a961;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(15 23 42 / 0.05), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+        }
+
+        .elegant-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #c9a961, transparent);
+            max-width: 120px;
+            margin: 1.25rem auto;
+        }
+
+        .navy-text {
+            color: #0f172a;
+        }
     </style>
 </head>
-<body class="bg-sky-50 relative">
+<body class="bg-[#f9f5eb] relative">
 
-    <audio id="bgMusic" loop autoplay>
+    <audio id="bgMusic" loop>
         <source src="bg-music.mp3" type="audio/mpeg">
         <source src="bg-music.m4a" type="audio/mp4">
     </audio>
 
-    <button onclick="toggleMusic()" id="musicBtn" class="fixed bottom-6 right-6 bg-white/90 w-12 h-12 rounded-full shadow-lg z-40 flex items-center justify-center text-xl border border-sky-100">
-        🎵
+    <button onclick="toggleMusic()" id="musicBtn" 
+            class="fixed bottom-6 right-6 bg-white/90 w-11 h-11 rounded-full shadow-lg z-40 flex items-center justify-center text-lg border border-[#c9a961]/30 text-[#0f172a]">
+        <i class="fas fa-music"></i>
     </button>
 
     <div class="max-w-md mx-auto bg-white min-h-screen shadow-2xl overflow-hidden">
 
-        <img src="main-photo.png" alt="손태국 금호읍장님" class="photo">
+        <!-- 메인 사진 -->
+        <img src="main-photo.png" alt="김병삼 영천시장" class="photo">
 
-        <div class="text-center" style="background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%); padding: 40px 24px 30px;">
-            <div class="flex justify-center gap-3 mb-4">
-                <span class="text-4xl">🌸</span>
-                <span class="text-4xl">🌼</span>
-                <span class="text-4xl">🌺</span>
-            </div>
-            <h1 class="text-4xl font-bold tracking-tighter leading-tight text-slate-800">
-                손태국 금호읍장님<br>
-                퇴임식에 초대합니다
+        <!-- 헤더 섹션 -->
+        <div class="text-center px-6 pt-10 pb-8 bg-[#f9f5eb]">
+            <div class="elegant-divider"></div>
+            
+            <h1 class="title-serif text-4xl font-bold tracking-tighter leading-tight navy-text">
+                영천시장 김병삼<br>
+                취임식에 초대합니다
             </h1>
-            <p class="mt-6 text-sky-600 text-lg font-medium">따뜻한 마음으로 함께해 주세요 💕</p>
+            
+            <p class="mt-5 text-[#475569] text-[15px] font-medium tracking-wide">
+                정중히 초대합니다
+            </p>
+            
+            <div class="elegant-divider"></div>
         </div>
 
-        <div class="px-6 -mt-6 relative z-10">
-            <div class="bg-white rounded-3xl shadow-xl p-8 text-center">
-                <span class="px-6 py-2 bg-gradient-to-r from-sky-400 to-pink-400 text-white text-base font-medium rounded-3xl">2026년 6월 19일 (금요일)</span>
-                <p class="font-bold text-sky-600 mt-5">
-  <span class="text-3xl">오전</span>
-  <span class="text-6xl">10:00</span>
-</p>
-                <p class="text-slate-500 mt-1">금호읍 행정복지센터 3층 대회의실</p>
+        <!-- 날짜/시간 카드 -->
+        <div class="px-6 -mt-4 relative z-10">
+            <div class="section-card p-8 text-center border border-[#c9a961]/10">
+                <div class="inline-flex items-center gap-2 px-5 py-1.5 bg-[#0f172a] text-[#c9a961] text-sm font-medium rounded-full tracking-wider">
+                    <i class="fas fa-calendar-alt mr-1.5"></i>
+                    2026년 7월 1일 (수요일)
+                </div>
+                
+                <p class="font-bold mt-6">
+                    <span class="text-3xl text-[#475569]">오전</span>
+                    <span class="text-6xl navy-text ml-1">10:00</span>
+                </p>
+                
+                <p class="text-[#475569] mt-2 text-[15px]">영천시청 본관 대회의실</p>
             </div>
         </div>
 
-        <div class="px-6 pt-8 pb-12 space-y-8">
+        <div class="px-6 pt-9 pb-10 space-y-7">
 
-            <div class="bg-white rounded-3xl p-7 shadow">
-                <div class="flex items-center gap-4 mb-5">
-                    <span class="text-3xl">📍</span>
+            <!-- 장소 정보 -->
+            <div class="section-card p-7 border border-[#c9a961]/10">
+                <div class="flex items-start gap-4">
+                    <div class="mt-1">
+                        <i class="fas fa-map-marker-alt text-2xl gold-accent"></i>
+                    </div>
                     <div class="flex-1">
-                        <p class="font-semibold">금호읍 행정복지센터 3층 대회의실</p>
-                        <p class="text-slate-600">경상북도 영천시 금호읍 금호로 153</p>
+                        <p class="font-semibold navy-text text-[15px]">영천시청 본관 대회의실</p>
+                        <p class="text-[#64748b] text-sm mt-0.5">경상북도 영천시 시청로 1</p>
+                        
+                        <a href="https://map.kakao.com/?q=영천시청" 
+                           target="_blank"
+                           class="mt-4 block w-full bg-[#c9a961] hover:bg-[#b8975e] transition-colors text-[#0f172a] font-semibold py-3.5 rounded-2xl text-center text-sm flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fas fa-map"></i>
+                            <span>카카오맵으로 위치 보기</span>
+                        </a>
                     </div>
                 </div>
-                <a href="https://map.kakao.com/?q=%EA%B8%88%ED%98%B8%EC%9D%8D+%ED%96%89%EC%A0%95%EB%B3%B5%EC%A7%80%EC%84%BC%ED%84%B0" 
-                   target="_blank"
-                   class="block w-full bg-[#FEE500] hover:bg-[#FDD700] text-black font-semibold py-4 rounded-2xl text-center flex items-center justify-center gap-2 shadow-md">
-                    🗺️ 카카오맵 앱으로 위치 보기
-                </a>
             </div>
 
-            <div class="bg-gradient-to-br from-sky-50 to-pink-50 rounded-3xl p-8 text-center">
-                <p class="text-lg font-medium text-slate-700 mb-4">문의처</p>
-                <a href="tel:054-339-7011" class="block">
-                    <p class="text-3xl font-bold text-sky-600 hover:text-sky-700 transition-colors">054-339-7011</p>
+            <!-- 문의처 -->
+            <div class="section-card p-7 text-center border border-[#c9a961]/10">
+                <p class="text-sm text-[#64748b] mb-2 tracking-wider">문의처</p>
+                <a href="tel:054-330-6000" class="block">
+                    <p class="text-3xl font-bold navy-text hover:text-[#1e3a5f] transition-colors">054-330-6000</p>
                 </a>
-                <p class="text-slate-500 mt-1">금호읍 행정복지센터</p>
-                <p class="text-xs text-slate-400 mt-5">(평일 09:00 ~ 18:00)</p>
-                <div class="mt-6 text-sm text-slate-500">
-                     문의사항은<br>
-                    위 번호로 연락 주시면 감사하겠습니다.
-                </div>
+                <p class="text-[#64748b] mt-1 text-sm">영천시청</p>
+                <p class="text-xs text-[#94a3b8] mt-4">(평일 09:00 ~ 18:00)</p>
             </div>
 
+            <!-- 갤러리 -->
             <div>
-                <p class="text-center text-slate-500 text-sm mb-4">📸 함께한 소중한 순간들</p>
-                <div class="grid grid-cols-4 gap-3" id="gallery"></div>
+                <p class="text-center text-[#64748b] text-xs tracking-[1.5px] mb-4 font-medium">함께하는 소중한 순간들</p>
+                <div class="grid grid-cols-4 gap-2.5" id="gallery"></div>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            <!-- 버튼 영역 -->
+            <div class="grid grid-cols-2 gap-3 pt-2">
                 <button onclick="shareInvitation()" 
-                        class="py-5 bg-gradient-to-r from-sky-500 to-pink-500 text-white rounded-3xl font-semibold flex items-center justify-center gap-2 shadow-lg">
-                    <i class="fas fa-share-alt"></i> 공유하기
+                        class="py-4 bg-[#0f172a] hover:bg-[#1e2937] transition-all text-white rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 shadow-md">
+                    <i class="fas fa-share-alt"></i>
+                    <span>공유하기</span>
                 </button>
                 <button onclick="showQRCode()" 
-                        class="py-5 bg-white border-2 border-slate-300 text-slate-700 rounded-3xl font-semibold flex items-center justify-center gap-2 shadow-lg hover:bg-slate-50">
-                    📱 QR코드 보기
+                        class="py-4 bg-white border-2 border-[#c9a961] text-[#0f172a] hover:bg-[#f9f5eb] transition-all rounded-2xl font-semibold text-sm flex items-center justify-center gap-2">
+                    <i class="fas fa-qrcode"></i>
+                    <span>QR코드 보기</span>
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- 이미지 모달 -->
     <div id="modal" class="hidden fixed inset-0 bg-black/95 z-[9999] items-center justify-center">
         <div class="relative w-full max-w-lg mx-4">
-            <span onclick="closeModal()" class="absolute -top-12 right-0 text-white text-5xl cursor-pointer z-10">×</span>
+            <span onclick="closeModal()" class="absolute -top-12 right-0 text-white text-5xl cursor-pointer z-10 font-light">×</span>
             
             <div class="relative">
-                <img id="modal-image" class="w-full rounded-3xl" alt="">
-                <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center text-3xl">‹</button>
-                <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center text-3xl">›</button>
+                <img id="modal-image" class="w-full rounded-3xl shadow-2xl" alt="">
+                <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center text-3xl transition-all">‹</button>
+                <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center text-3xl transition-all">›</button>
             </div>
-            <div class="text-center text-white/70 text-sm mt-4" id="image-counter">1 / 8</div>
+            <div class="text-center text-white/60 text-xs mt-4 tracking-widest" id="image-counter">1 / 8</div>
         </div>
     </div>
 
+    <!-- QR 모달 -->
     <div id="qrModal" class="hidden fixed inset-0 bg-black/90 z-[10000] items-center justify-center" onclick="if(event.target===this)closeQRModal()">
-        <div class="bg-white rounded-3xl p-8 max-w-[280px] w-full mx-4 text-center">
-            <p class="text-slate-600 mb-4 font-medium">초대장 QR코드</p>
+        <div class="bg-white rounded-3xl p-8 max-w-[280px] w-full mx-4 text-center shadow-2xl">
+            <p class="text-[#475569] mb-5 font-medium tracking-wide">초대장 QR코드</p>
             <div id="qrcode" class="mx-auto"></div>
-            <p class="text-xs text-slate-400 mt-6">핸드폰으로 스캔하면 바로 초대장으로 이동합니다</p>
-            <button onclick="closeQRModal()" class="mt-6 w-full py-3 text-slate-500 font-medium border border-slate-200 rounded-2xl">닫기</button>
+            <p class="text-xs text-[#94a3b8] mt-6 leading-relaxed">핸드폰으로 스캔하면<br>바로 초대장으로 이동합니다</p>
+            <button onclick="closeQRModal()" 
+                    class="mt-6 w-full py-3 text-[#475569] font-medium border border-[#e2e8f0] hover:bg-[#f8fafc] rounded-2xl text-sm transition-colors">닫기</button>
         </div>
     </div>
 
-    <footer class="text-center text-xs text-slate-400 py-8">
-        © 2026 손태국 금호읍장님 퇴임식 모바일 초대장
+    <footer class="text-center text-[10px] text-[#94a3b8] py-8 tracking-widest">
+        © 2026 영천시장 김병삼 취임식 모바일 초대장
     </footer>
 
     <script>
         tailwind.config = { content: [] };
 
-        // 배경음악 제어 기능
+        // 배경음악 제어
         const music = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicBtn');
         let isMusicPlaying = false;
@@ -139,24 +200,24 @@
         function toggleMusic() {
             if (isMusicPlaying) {
                 music.pause();
-                musicBtn.innerHTML = '🔇';
+                musicBtn.innerHTML = '<i class="fas fa-music"></i>';
             } else {
                 music.play().catch(e => console.log("Audio play failed:", e));
-                musicBtn.innerHTML = '🎵';
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
             }
             isMusicPlaying = !isMusicPlaying;
         }
 
-        // 첫 터치 시 음악 재생
+        // 첫 터치 시 음악 재생 (선택)
         document.body.addEventListener('touchstart', () => { 
             if (music.paused && !isMusicPlaying) { 
                 music.play().catch(e => console.log("Audio play failed:", e)); 
                 isMusicPlaying = true;
-                musicBtn.innerHTML = '🎵';
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
             } 
         }, { once: true });
 
-        // 갤러리 8장
+        // 갤러리 (기존 사진 파일명 유지 - 사용자님께서 사진 교체 가능)
         const photos = [
             "gallery-1.JPG", "gallery-2.jpg", "gallery-3.jpg", "gallery-4.JPG",
             "gallery-5.jpg", "gallery-6.jpg", "gallery-7.jpg", "gallery-8.jpg"
@@ -168,8 +229,8 @@
             photos.forEach((filename, index) => {
                 const img = document.createElement('img');
                 img.src = filename;
-                img.className = "gallery-img w-full aspect-square object-cover rounded-2xl cursor-pointer";
-                img.loading = "lazy"; // 지연 로딩 추가
+                img.className = "gallery-img w-full aspect-square object-cover rounded-xl cursor-pointer border border-[#e2e8f0]";
+                img.loading = "lazy";
                 img.onclick = () => openModal(index);
                 container.appendChild(img);
             });
@@ -181,7 +242,7 @@
             const modal = document.getElementById('modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+            document.body.style.overflow = 'hidden';
         }
 
         function updateModalImage() {
@@ -193,26 +254,31 @@
             const modal = document.getElementById('modal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
-            document.body.style.overflow = 'auto'; // 배경 스크롤 원상복구
+            document.body.style.overflow = 'auto';
         }
 
         function nextImage() { currentIndex = (currentIndex + 1) % photos.length; updateModalImage(); }
         function prevImage() { currentIndex = (currentIndex - 1 + photos.length) % photos.length; updateModalImage(); }
 
-        // 스와이프
+        // 스와이프 지원
         let touchStartX = 0;
-        document.getElementById('modal-image').addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
-        document.getElementById('modal-image').addEventListener('touchend', e => {
-            const touchEndX = e.changedTouches[0].screenX;
-            if (touchEndX < touchStartX - 50) nextImage();
-            if (touchEndX > touchStartX + 50) prevImage();
-        });
+        const modalImg = document.getElementById('modal-image');
+        if (modalImg) {
+            modalImg.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+            modalImg.addEventListener('touchend', e => {
+                const touchEndX = e.changedTouches[0].screenX;
+                if (touchEndX < touchStartX - 50) nextImage();
+                if (touchEndX > touchStartX + 50) prevImage();
+            });
+        }
 
         // 공유하기
         async function shareInvitation() {
             const shareData = {
-                title: '손태국 금호읍장님 퇴임식 초대장',
-                text: '2026년 6월 19일(금) 오후 14시\n금호읍 행정복지센터 3층 대회의실\n초대합니다 💕',
+                title: '영천시장 김병삼 취임식 초대장',
+                text: '2026년 7월 1일(수) 오전 10시
+영천시청 본관 대회의실
+정중히 초대합니다',
                 url: window.location.href
             };
 
@@ -220,15 +286,13 @@
                 try {
                     await navigator.share(shareData);
                     return; 
-                } catch (err) {
-                    // 공유 취소
-                }
+                } catch (err) {}
             } else {
                 try {
                     await navigator.clipboard.writeText(window.location.href);
-                    alert('✅ 초대장 링크가 복사되었습니다!\n카카오톡에 붙여넣기 해주세요.');
+                    alert('✅ 초대장 링크가 볳사되었습니다.\n카카오톡에 붙여넣기 해주세요.');
                 } catch {
-                    alert('링크 복사 실패\n주소: ' + window.location.href);
+                    alert('링크 볳사 실패\n주소: ' + window.location.href);
                 }
             }
         }
@@ -240,14 +304,15 @@
             container.innerHTML = '';
             new QRCode(container, {
                 text: window.location.href,
-                width: 220,
-                height: 220,
-                colorDark: "#1e2937",
+                width: 200,
+                height: 200,
+                colorDark: "#0f172a",
                 colorLight: "#ffffff"
             });
             qrModal.classList.remove('hidden');
             qrModal.classList.add('flex');
         }
+        
         function closeQRModal() {
             const qrModal = document.getElementById('qrModal');
             qrModal.classList.add('hidden');
