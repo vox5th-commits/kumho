@@ -13,8 +13,8 @@
 
     <style>
         :root {
-            --primary: #0A1D37; /* 신뢰의 네이비 */
-            --accent: #C5A358;  /* 명예의 골드 */
+            --primary: #0A1D37; 
+            --accent: #C5A358;  
             --bg: #F8F9FA;
         }
 
@@ -25,24 +25,14 @@
             word-break: keep-all;
         }
 
-        .serif { font-family: 'Noto Serif KR', serif; }
-
-        /* 고급스러운 그라데이션 오버레이 */
         .hero-overlay {
             background: linear-gradient(to bottom, rgba(10,29,55,0) 60%, rgba(10,29,55,1) 100%);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .gold-border {
             border-left: 2px solid var(--accent);
         }
 
-        /* 버튼 애니메이션 */
         .btn-hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -72,57 +62,61 @@
             </div>
         </section>
 
-        <section class="px-8 py-20 bg-white">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <i class="fa-solid fa-quote-left text-accent opacity-30 text-3xl mb-4"></i>
-                <h2 class="text-xl font-bold mb-8 text-[#0A1D37]">정중히 초대합니다</h2>
-                <p class="text-[16px] leading-[1.8] text-gray-600 font-light">
-                    별빛 가득한 영천의 새로운 내일을 위해<br>
-                    시민 여러분의 소중한 목소리를 가슴에 담고<br>
-                    첫걸음을 내딛고자 합니다.<br><br>
-                    그 시작의 자리에 함께 하시어<br>
-                    자리를 빛내주시면 감사하겠습니다.
-                </p>
-                <p class="mt-12 text-lg font-medium text-[#0A1D37]">영천시장 당선인 <span class="text-2xl font-bold ml-1">김병삼</span> 올림</p>
-            </div>
-        </section>
+        <!-- 배경 끊김 문제 해결: 그라데이션으로 부드럽게 통합 -->
+        <div class="bg-gradient-to-b from-white via-white to-[#F4F6F9]">
+            <section class="px-8 pt-20 pb-12">
+                <div class="text-center" data-aos="fade-up">
+                    <i class="fa-solid fa-quote-left text-accent opacity-30 text-3xl mb-4"></i>
+                    <h2 class="text-xl font-bold mb-8 text-[#0A1D37]">정중히 초대합니다</h2>
+                    <p class="text-[16px] leading-[1.8] text-gray-600 font-light">
+                        별빛 가득한 영천의 새로운 내일을 위해<br>
+                        시민 여러분의 소중한 목소리를 가슴에 담고<br>
+                        첫걸음을 내딛고자 합니다.<br><br>
+                        그 시작의 자리에 함께 하시어<br>
+                        자리를 빛내주시면 감사하겠습니다.
+                    </p>
+                    <p class="mt-12 text-lg font-medium text-[#0A1D37]">영천시장 당선인 <span class="text-2xl font-bold ml-1">김병삼</span> 올림</p>
+                </div>
+            </section>
 
-        <section class="px-6 py-10 bg-[#F1F4F8]">
-            <div class="glass-card rounded-[2rem] p-10 shadow-xl -mt-20 relative z-20" data-aos="zoom-in">
-                <div class="space-y-8">
-                    <div class="flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-full bg-[#0A1D37] flex items-center justify-center text-white text-lg">
-                            <i class="fa-regular fa-calendar"></i>
+            <section class="px-6 pb-20">
+                <!-- 네거티브 마진을 제거하고 카드가 부드러운 배경 위에 자연스럽게 안착되도록 수정 -->
+                <div class="bg-white rounded-[2rem] p-8 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-gray-100" data-aos="fade-up">
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-5">
+                            <div class="w-12 h-12 rounded-full bg-[#0A1D37] flex items-center justify-center text-white text-lg">
+                                <i class="fa-regular fa-calendar"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Date & Time</p>
+                                <p class="text-lg font-bold text-[#0A1D37]">2026. 07. 01. WED</p>
+                                <p class="text-md text-gray-600">오전 10시 00분</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Date & Time</p>
-                            <p class="text-lg font-bold text-[#0A1D37]">2026. 07. 01. WED</p>
-                            <p class="text-md text-gray-600">오전 10시 00분</p>
+
+                        <div class="flex items-center gap-5">
+                            <div class="w-12 h-12 rounded-full bg-[#0A1D37] flex items-center justify-center text-white text-lg">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Location</p>
+                                <p class="text-lg font-bold text-[#0A1D37]">영천시청 본관 대회의실</p>
+                                <p class="text-md text-gray-600 text-sm">경상북도 영천시 시청로 1</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-full bg-[#0A1D37] flex items-center justify-center text-white text-lg">
-                            <i class="fa-solid fa-location-dot"></i>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Location</p>
-                            <p class="text-lg font-bold text-[#0A1D37]">영천시청 본관 대회의실</p>
-                            <p class="text-md text-gray-600 text-sm">경상북도 영천시 시청로 1</p>
-                        </div>
+                    <div class="mt-10 space-y-3">
+                        <a href="https://map.kakao.com/?q=영천시청" class="btn-hover w-full py-4 bg-[#0A1D37] text-white rounded-xl font-medium text-sm flex items-center justify-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-map"></i> 카카오맵 길찾기
+                        </a>
+                        <a href="tel:0543306000" class="btn-hover w-full py-4 border border-gray-200 text-gray-600 rounded-xl font-medium text-sm flex items-center justify-center gap-2 bg-white">
+                            <i class="fa-solid fa-phone"></i> 행사 문의하기
+                        </a>
                     </div>
                 </div>
-
-                <div class="mt-10 space-y-3">
-                    <a href="https://map.kakao.com/?q=영천시청" class="btn-hover w-full py-4 bg-[#0A1D37] text-white rounded-xl font-medium text-sm flex items-center justify-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-map"></i> 카카오맵 길찾기
-                    </a>
-                    <a href="tel:0543306000" class="btn-hover w-full py-4 border border-gray-200 text-gray-600 rounded-xl font-medium text-sm flex items-center justify-center gap-2 bg-white">
-                        <i class="fa-solid fa-phone"></i> 행사 문의하기
-                    </a>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
 
         <section class="px-8 py-20 bg-white overflow-hidden">
             <h3 class="text-xs tracking-[0.4em] text-accent font-bold mb-10" data-aos="fade-right">CITY VISION</h3>
@@ -157,25 +151,17 @@
     </div>
 
     <script>
-        // 애니메이션 초기화
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
+        AOS.init({ duration: 1000, once: true });
 
-        // 공유 기능
         function share() {
             if (navigator.share) {
                 navigator.share({
                     title: '영천시장 김병삼 취임식 초대장',
                     url: window.location.href
                 });
-            } else {
-                copyLink();
-            }
+            } else { copyLink(); }
         }
 
-        // 링크 복사
         function copyLink() {
             const el = document.createElement('textarea');
             el.value = window.location.href;
