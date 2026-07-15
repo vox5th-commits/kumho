@@ -213,10 +213,10 @@
       visibility: hidden;
       pointer-events: none;
       transition:
-        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.28s,
-        opacity 0.55s ease 0.32s,
-        visibility 0s linear 0.28s,
-        box-shadow 0.6s ease;
+        transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.22s,
+        opacity 0.4s ease 0.24s,
+        visibility 0s linear 0.22s,
+        box-shadow 0.45s ease;
     }
     #envelope-stage.opened .env-card {
       /* screen center — readable hold */
@@ -301,7 +301,7 @@
       z-index: 5;
       transform-origin: top center;
       transform: rotateX(0deg);
-      transition: transform 0.95s cubic-bezier(0.4, 0, 0.2, 1) 0.12s;
+      transition: transform 0.72s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
       pointer-events: none;
       /* keep 3d flip looking solid */
       backface-visibility: hidden;
@@ -360,38 +360,223 @@
       background: linear-gradient(90deg, transparent, rgba(196,165,116,0.32), transparent);
     }
 
-    /* sealing wax — sits on flap/pocket junction */
+    /* sealing wax — irregular stamp with crack-on-open */
     .seal {
       position: absolute;
       left: 50%;
       top: 38%;
       transform: translate(-50%, -50%);
       z-index: 8;
-      width: 58px;
-      height: 58px;
+      width: 68px;
+      height: 68px;
+      pointer-events: none;
+    }
+
+    /* small melted drips under the main blob */
+    .seal-drip {
+      position: absolute;
+      background:
+        radial-gradient(ellipse at 40% 30%, #8a3030 0%, #5a1818 70%, #3a0e0e 100%);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.12), 0 2px 4px rgba(0,0,0,0.25);
+      z-index: 0;
+      transition: opacity 0.35s ease, transform 0.45s ease;
+    }
+    .seal-drip.d1 {
+      width: 14px;
+      height: 18px;
+      left: 10px;
+      bottom: 4px;
+      border-radius: 40% 50% 55% 45% / 35% 40% 60% 65%;
+    }
+    .seal-drip.d2 {
+      width: 11px;
+      height: 14px;
+      right: 12px;
+      bottom: 8px;
+      border-radius: 50% 45% 50% 55% / 40% 50% 50% 60%;
+    }
+    #envelope-stage.opened .seal-drip {
+      opacity: 0;
+      transform: translateY(6px) scale(0.7);
+    }
+
+    /* shards assemble into one seal when closed */
+    .seal-shard {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      transition:
+        transform 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s ease 0.08s;
+      will-change: transform, opacity;
+    }
+    /* slight overlap on edges so closed seal has no hairline seams */
+    .seal-shard.s1 {
+      clip-path: polygon(0 0, 60% 0, 50% 56%, 0 74%);
+      z-index: 3;
+    }
+    .seal-shard.s2 {
+      clip-path: polygon(56% 0, 100% 0, 100% 70%, 48% 50%);
+      z-index: 3;
+    }
+    .seal-shard.s3 {
+      clip-path: polygon(0 70%, 50% 53%, 52% 50%, 100% 66%, 100% 100%, 0 100%);
+      z-index: 2;
+    }
+    #envelope-stage.opened .seal-shard.s1 {
+      transform: translate(-14px, -12px) rotate(-22deg);
+      opacity: 0;
+    }
+    #envelope-stage.opened .seal-shard.s2 {
+      transform: translate(16px, -10px) rotate(20deg);
+      opacity: 0;
+    }
+    #envelope-stage.opened .seal-shard.s3 {
+      transform: translate(2px, 18px) rotate(8deg);
+      opacity: 0;
+    }
+
+    /* full wax face drawn once per shard (clipped) */
+    .seal-face {
+      position: absolute;
+      inset: 4px;
+      border-radius: 46% 54% 48% 52% / 52% 46% 54% 48%;
+      background:
+        radial-gradient(circle at 30% 26%, rgba(180, 90, 90, 0.55) 0%, transparent 42%),
+        radial-gradient(circle at 72% 70%, rgba(40, 10, 10, 0.55) 0%, transparent 48%),
+        radial-gradient(circle at 50% 48%, #8b3030 0%, #6b1e1e 42%, #4a1212 78%, #2e0a0a 100%);
+      box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.45),
+        0 1px 2px rgba(0, 0, 0, 0.35),
+        inset 0 3px 5px rgba(255, 220, 200, 0.22),
+        inset 0 -5px 10px rgba(0, 0, 0, 0.38),
+        inset 2px 0 4px rgba(0, 0, 0, 0.12);
+    }
+
+    /* outer raised rim (pressed into soft wax) */
+    .seal-rim {
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(226, 180, 140, 0.22);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 230, 200, 0.28),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.35),
+        0 0 0 3px rgba(60, 15, 15, 0.25);
+      pointer-events: none;
+    }
+
+    /* inner recessed stamp well */
+    .seal-well {
+      position: absolute;
+      inset: 14px;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 35% 30%, #8b3a3a 0%, #6b2222 45%, #4a1515 100%);
+        radial-gradient(circle at 40% 35%, #5a1a1a 0%, #3d1010 55%, #2a0a0a 100%);
       box-shadow:
-        0 4px 12px rgba(0,0,0,0.4),
-        inset 0 2px 4px rgba(255,255,255,0.15),
-        inset 0 -3px 6px rgba(0,0,0,0.3);
+        inset 0 3px 5px rgba(0, 0, 0, 0.45),
+        inset 0 -1px 2px rgba(255, 200, 180, 0.08),
+        0 1px 1px rgba(255, 210, 180, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.45s ease, opacity 0.4s ease;
     }
-    .seal span {
-      font-family: 'Cormorant Garamond', serif;
-      color: var(--gold-light);
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      font-weight: 500;
+
+    /* embossed motif (no letters) */
+    .seal-motif {
+      width: 22px;
+      height: 22px;
+      color: rgba(226, 190, 150, 0.58);
+      filter: drop-shadow(0 1px 0 rgba(255, 230, 200, 0.18))
+              drop-shadow(0 -0.5px 0 rgba(0, 0, 0, 0.4));
     }
-    #envelope-stage.opened .seal {
-      transform: translate(-50%, -50%) scale(0.5);
+    .seal-motif svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* hairline crack flash on open */
+    .seal-crack {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
       opacity: 0;
-      transition-delay: 0s;
+    }
+    .seal-crack::before,
+    .seal-crack::after {
+      content: '';
+      position: absolute;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(20, 5, 5, 0.55) 20%,
+        rgba(40, 12, 12, 0.35) 50%,
+        rgba(20, 5, 5, 0.5) 80%,
+        transparent 100%
+      );
+      box-shadow: 0 0 1px rgba(255, 200, 180, 0.15);
+    }
+    .seal-crack::before {
+      width: 1.5px;
+      height: 48%;
+      left: 48%;
+      top: 8%;
+      transform: rotate(-8deg);
+    }
+    .seal-crack::after {
+      width: 1.5px;
+      height: 42%;
+      left: 50%;
+      top: 48%;
+      transform: rotate(28deg);
+    }
+    #envelope-stage.opened .seal-crack {
+      animation: crack-flash 0.35s ease forwards;
+    }
+    @keyframes crack-flash {
+      0% { opacity: 1; }
+      40% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* gold dust particles on crack */
+    .seal-sparks {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+    }
+    .seal-sparks i {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 3px;
+      height: 3px;
+      margin: -1.5px 0 0 -1.5px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f0e0c0 0%, #c4a574 70%, transparent 100%);
+      opacity: 0;
+      box-shadow: 0 0 3px rgba(226, 209, 176, 0.6);
+    }
+    #envelope-stage.opened .seal-sparks i {
+      animation: spark-fly 0.65s ease-out forwards;
+    }
+    #envelope-stage.opened .seal-sparks i:nth-child(1)  { --dx: -26px; --dy: -20px; animation-delay: 0.02s; width: 2.5px; height: 2.5px; }
+    #envelope-stage.opened .seal-sparks i:nth-child(2)  { --dx: 24px;  --dy: -18px; animation-delay: 0.04s; }
+    #envelope-stage.opened .seal-sparks i:nth-child(3)  { --dx: -18px; --dy: 16px;  animation-delay: 0.03s; width: 2px; height: 2px; }
+    #envelope-stage.opened .seal-sparks i:nth-child(4)  { --dx: 22px;  --dy: 14px;  animation-delay: 0.05s; width: 2.5px; height: 2.5px; }
+    #envelope-stage.opened .seal-sparks i:nth-child(5)  { --dx: -8px;  --dy: -28px; animation-delay: 0.06s; }
+    #envelope-stage.opened .seal-sparks i:nth-child(6)  { --dx: 12px;  --dy: -26px; animation-delay: 0.07s; width: 2px; height: 2px; }
+    #envelope-stage.opened .seal-sparks i:nth-child(7)  { --dx: -30px; --dy: 4px;   animation-delay: 0.04s; }
+    #envelope-stage.opened .seal-sparks i:nth-child(8)  { --dx: 28px;  --dy: 2px;   animation-delay: 0.05s; width: 2px; height: 2px; }
+    #envelope-stage.opened .seal-sparks i:nth-child(9)  { --dx: 4px;   --dy: 24px;  animation-delay: 0.08s; }
+    #envelope-stage.opened .seal-sparks i:nth-child(10) { --dx: -14px; --dy: -8px;  animation-delay: 0.03s; width: 2px; height: 2px; }
+    @keyframes spark-fly {
+      0%   { opacity: 0; transform: translate(0, 0) scale(0.6); }
+      12%  { opacity: 1; transform: translate(calc(var(--dx) * 0.15), calc(var(--dy) * 0.15)) scale(1.1); }
+      100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.2); }
     }
 
     .env-hint {
@@ -514,33 +699,51 @@
     }
     .gallery-grid img:active { opacity: 0.85; }
 
-    /* timeline */
-    .timeline-item {
-      position: relative;
-      padding-left: 28px;
-      padding-bottom: 28px;
+    /* calendar + d-day */
+    .cal-wrap {
+      max-width: 300px;
+      margin: 0 auto;
     }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 8px;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--gold), rgba(196,165,116,0.15));
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px 2px;
+      text-align: center;
     }
-    .timeline-item:last-child::before { display: none; }
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 6px;
-      width: 11px;
-      height: 11px;
+    .cal-dow {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--soft);
+      padding-bottom: 6px;
+    }
+    .cal-dow.sun { color: #b07070; }
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      color: var(--navy);
       border-radius: 50%;
-      border: 1px solid var(--gold);
-      background: var(--paper);
-      box-shadow: 0 0 0 3px rgba(196,165,116,0.12);
+    }
+    .cal-day.empty { visibility: hidden; }
+    .cal-day.sun { color: #b07070; }
+    .cal-day.wedding {
+      background: var(--navy);
+      color: var(--gold-light);
+      box-shadow: 0 0 0 3px rgba(196,165,116,0.2);
+      font-weight: 500;
+    }
+    .dday-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .dday-num span {
+      color: var(--gold-dark);
     }
 
     /* accordion */
@@ -553,23 +756,108 @@
     .acc-chevron { transition: transform 0.3s ease; }
     .acc-chevron.open { transform: rotate(180deg); }
 
-    /* lightbox */
+    /* lightbox + swipe */
     #lightbox {
       position: fixed;
       inset: 0;
       z-index: 200;
       background: rgba(8,10,16,0.94);
       display: none;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 24px 16px 40px;
+      touch-action: pan-y;
     }
     #lightbox.show { display: flex; }
-    #lightbox img {
+    .lb-stage {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      user-select: none;
+    }
+    #lightbox-img {
       max-width: 100%;
-      max-height: 85vh;
+      max-height: min(78vh, 720px);
       object-fit: contain;
       border-radius: 2px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      pointer-events: none;
+    }
+    #lightbox-img.swiping {
+      transition: none;
+    }
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(196,165,116,0.35);
+      background: rgba(12,18,32,0.55);
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      backdrop-filter: blur(6px);
+    }
+    .lb-nav.prev { left: 4px; }
+    .lb-nav.next { right: 4px; }
+    .lb-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      color: rgba(247,243,236,0.75);
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 3;
+    }
+    .lb-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .lb-counter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: rgba(226,209,176,0.75);
+    }
+    .lb-hint {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: rgba(247,243,236,0.35);
+      text-transform: uppercase;
+    }
+    .lb-dots {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .lb-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(226,209,176,0.28);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lb-dots span.on {
+      background: var(--gold-light);
+      transform: scale(1.25);
     }
 
     /* BGM float */
@@ -578,8 +866,8 @@
       right: max(16px, calc(50% - 204px));
       bottom: 24px;
       z-index: 50;
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       border: 1px solid rgba(196,165,116,0.4);
       background: rgba(12,18,32,0.82);
@@ -590,10 +878,23 @@
       justify-content: center;
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
       cursor: pointer;
+      padding: 0;
     }
     #bgm-btn.visible { display: flex; }
-    #bgm-btn.playing i { animation: spin-slow 8s linear infinite; }
-    @keyframes spin-slow {
+    #bgm-btn .lp {
+      width: 34px;
+      height: 34px;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+    #bgm-btn.playing .lp {
+      animation: spin-lp 3.2s linear infinite;
+    }
+    #bgm-btn:not(.playing) .lp {
+      /* slight tilt when paused — reads as resting vinyl */
+      transform: rotate(-12deg);
+    }
+    @keyframes spin-lp {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
@@ -683,7 +984,19 @@
         <div class="env-side-r"></div>
         <div class="env-flap"><div class="env-flap-face"></div></div>
         <div class="env-pocket"></div>
-        <div class="seal"><span>H · C</span></div>
+        <div class="seal" aria-hidden="true">
+          <div class="seal-drip d1"></div>
+          <div class="seal-drip d2"></div>
+          <div class="seal-crack"></div>
+          <!-- same wax face in 3 clipped shards (looks whole when closed) -->
+          <div class="seal-shard s1"><div class="seal-face"><div class="seal-rim"></div><div class="seal-well"><div class="seal-motif"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="3.2" stroke="currentColor" stroke-width="1.1"/><path d="M16 6.5c1.2 3.2 1.2 6.8 0 10M16 15.5c-1.2 3.2-1.2 6.8 0 10M6.5 16c3.2-1.2 6.8-1.2 10 0M15.5 16c3.2 1.2 6.8 1.2 10 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M9.2 9.2c2.6 2 5.6 2.6 8.6 1.8M22.8 9.2c-2 2.6-2.6 5.6-1.8 8.6M22.8 22.8c-2.6-2-5.6-2.6-8.6-1.8M9.2 22.8c2-2.6 2.6-5.6 1.8-8.6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/></svg></div></div></div></div>
+          <div class="seal-shard s2"><div class="seal-face"><div class="seal-rim"></div><div class="seal-well"><div class="seal-motif"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="3.2" stroke="currentColor" stroke-width="1.1"/><path d="M16 6.5c1.2 3.2 1.2 6.8 0 10M16 15.5c-1.2 3.2-1.2 6.8 0 10M6.5 16c3.2-1.2 6.8-1.2 10 0M15.5 16c3.2 1.2 6.8 1.2 10 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M9.2 9.2c2.6 2 5.6 2.6 8.6 1.8M22.8 9.2c-2 2.6-2.6 5.6-1.8 8.6M22.8 22.8c-2.6-2-5.6-2.6-8.6-1.8M9.2 22.8c2-2.6 2.6-5.6 1.8-8.6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/></svg></div></div></div></div>
+          <div class="seal-shard s3"><div class="seal-face"><div class="seal-rim"></div><div class="seal-well"><div class="seal-motif"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="3.2" stroke="currentColor" stroke-width="1.1"/><path d="M16 6.5c1.2 3.2 1.2 6.8 0 10M16 15.5c-1.2 3.2-1.2 6.8 0 10M6.5 16c3.2-1.2 6.8-1.2 10 0M15.5 16c3.2 1.2 6.8 1.2 10 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M9.2 9.2c2.6 2 5.6 2.6 8.6 1.8M22.8 9.2c-2 2.6-2.6 5.6-1.8 8.6M22.8 22.8c-2.6-2-5.6-2.6-8.6-1.8M9.2 22.8c2-2.6 2.6-5.6 1.8-8.6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/></svg></div></div></div></div>
+          <div class="seal-sparks" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i>
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
       </div>
 
       <p class="env-hint" id="env-hint">Tap to open</p>
@@ -723,7 +1036,7 @@
         <div class="text-center" data-aos="fade-up">
           <p class="section-label mb-8">Invitation</p>
           <i class="fa-solid fa-quote-left text-gold/40 text-xl mb-5"></i>
-          <h2 class="font-serif text-2xl text-navy mb-8 font-medium tracking-wide">정중히 초대합니다</h2>
+          <h2 class="font-serif text-2xl text-navy mb-8 font-medium tracking-wide">새로운 시작을 알려드립니다</h2>
           <p id="invite-greeting" class="text-[15px] leading-[2] text-[#5c574f] font-light">
             서로가 마주 보며 다져온 사랑을<br />
             이제 함께 한 곳을 바라보며<br />
@@ -789,28 +1102,45 @@
         </div>
       </section>
 
-      <!-- TIMELINE -->
-      <section class="px-9 py-16 bg-paper">
-        <p class="section-label mb-10" data-aos="fade-right">Schedule</p>
-        <div data-aos="fade-up">
-          <div class="timeline-item">
-            <p class="font-serif text-lg text-navy">11:30</p>
-            <p class="text-sm text-[#5c574f] mt-0.5">포토타임 · 입장 안내</p>
-          </div>
-          <div class="timeline-item">
-            <p class="font-serif text-lg text-navy">12:30</p>
-            <p class="text-sm text-[#5c574f] mt-0.5">본식 시작</p>
-          </div>
-          <div class="timeline-item">
-            <p class="font-serif text-lg text-navy">13:10</p>
-            <p class="text-sm text-[#5c574f] mt-0.5">식사 및 축복</p>
-          </div>
-          <div class="timeline-item">
-            <p class="font-serif text-lg text-navy">14:00</p>
-            <p class="text-sm text-[#5c574f] mt-0.5">마무리 · 인사</p>
-          </div>
+      <!-- CALENDAR & D-DAY -->
+      <section class="px-6 py-16 bg-paper">
+        <div class="text-center mb-10" data-aos="fade-up">
+          <p class="section-label mb-3">Calendar</p>
+          <p class="font-serif text-2xl text-navy tracking-wide">예식 일정</p>
         </div>
-        <p class="text-xs text-soft mt-2 leading-relaxed">※ 예식 30분 전 도착을 권장드립니다.</p>
+
+        <div class="bg-white/80 border border-gold/15 rounded-2xl p-7 shadow-[0_12px_40px_-16px_rgba(20,28,43,0.1)]" data-aos="fade-up">
+          <div class="text-center mb-6">
+            <p class="font-serif text-lg text-navy tracking-[0.2em]">2026. 10</p>
+            <p class="text-xs text-soft mt-1 tracking-wide">오후 12시 30분</p>
+          </div>
+
+          <div class="cal-wrap mb-8">
+            <div class="cal-grid mb-1">
+              <div class="cal-dow sun">일</div>
+              <div class="cal-dow">월</div>
+              <div class="cal-dow">화</div>
+              <div class="cal-dow">수</div>
+              <div class="cal-dow">목</div>
+              <div class="cal-dow">금</div>
+              <div class="cal-dow">토</div>
+            </div>
+            <div class="cal-grid" id="cal-days"></div>
+          </div>
+
+          <div class="h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent mb-7"></div>
+
+          <div class="text-center">
+            <p class="text-[10px] tracking-[0.35em] text-soft uppercase mb-3">D-Day</p>
+            <p class="dday-num" id="dday-label">D-<span>—</span></p>
+            <p class="text-sm text-[#5c574f] mt-3 font-light" id="dday-sub">2026년 10월 18일</p>
+          </div>
+
+          <button type="button" onclick="addCalendar()"
+                  class="btn-outline w-full mt-8 py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2">
+            <i class="fa-regular fa-calendar-plus text-xs"></i> 내 캘린더에 저장
+          </button>
+        </div>
       </section>
 
       <!-- GALLERY -->
@@ -819,32 +1149,33 @@
           <p class="section-label mb-3">Gallery</p>
           <p class="font-serif text-2xl text-navy tracking-wide">우리의 순간</p>
         </div>
-        <div class="gallery-grid" data-aos="fade-up">
+        <div class="gallery-grid" data-aos="fade-up" id="gallery-grid">
           <div class="tall aspect-[3/4] overflow-hidden bg-navy/5">
-            <img src="gallery-1.jpg" alt="gallery" onclick="openLightbox(this.src)" loading="lazy" />
+            <img src="gallery-1.jpg" alt="gallery" data-gallery-idx="0" onclick="openLightbox(0)" loading="lazy" />
           </div>
           <div class="aspect-square overflow-hidden bg-navy/5">
-            <img src="gallery-2.jpg" alt="gallery" onclick="openLightbox(this.src)" loading="lazy" />
+            <img src="gallery-2.jpg" alt="gallery" data-gallery-idx="1" onclick="openLightbox(1)" loading="lazy" />
           </div>
           <div class="aspect-square overflow-hidden bg-navy/5">
-            <img src="gallery-3.jpg" alt="gallery" onclick="openLightbox(this.src)" loading="lazy" />
+            <img src="gallery-3.jpg" alt="gallery" data-gallery-idx="2" onclick="openLightbox(2)" loading="lazy" />
           </div>
           <div class="aspect-[4/3] overflow-hidden bg-navy/5">
-            <img src="gallery-4.jpg" alt="gallery" onclick="openLightbox(this.src)" loading="lazy" />
+            <img src="gallery-4.jpg" alt="gallery" data-gallery-idx="3" onclick="openLightbox(3)" loading="lazy" />
           </div>
           <div class="aspect-[4/3] overflow-hidden bg-navy/5">
-            <img src="gallery-5.jpg" alt="gallery" onclick="openLightbox(this.src)" loading="lazy" />
+            <img src="gallery-5.jpg" alt="gallery" data-gallery-idx="4" onclick="openLightbox(4)" loading="lazy" />
           </div>
           <div class="tall aspect-[3/4] overflow-hidden bg-navy/5">
-            <img src="gallery-6.jpg" alt="gallery" onclick="openLightbox(this.src)" loading="lazy" />
+            <img src="gallery-6.jpg" alt="gallery" data-gallery-idx="5" onclick="openLightbox(5)" loading="lazy" />
           </div>
           <div class="aspect-square overflow-hidden bg-navy/5">
-            <img src="gallery-7.jpg" alt="gallery" onclick="openLightbox(this.src)" loading="lazy" />
+            <img src="gallery-7.jpg" alt="gallery" data-gallery-idx="6" onclick="openLightbox(6)" loading="lazy" />
           </div>
           <div class="aspect-square overflow-hidden bg-navy/5">
-            <img src="gallery-8.jpg" alt="gallery" onclick="openLightbox(this.src)" loading="lazy" />
+            <img src="gallery-8.jpg" alt="gallery" data-gallery-idx="7" onclick="openLightbox(7)" loading="lazy" />
           </div>
         </div>
+        <p class="text-center text-[11px] text-soft mt-5 tracking-wide">사진을 누르면 크게 볼 수 있어요 · 스와이프로 넘기기</p>
       </section>
 
       <!-- DIRECTIONS -->
@@ -974,15 +1305,50 @@
 
   <!-- BGM -->
   <button type="button" id="bgm-btn" onclick="toggleBgm()" aria-label="배경음악">
-    <i class="fa-solid fa-music text-sm"></i>
+    <svg class="lp" viewBox="0 0 64 64" aria-hidden="true">
+      <!-- outer vinyl -->
+      <circle cx="32" cy="32" r="30" fill="#1a1a1a"/>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+      <!-- grooves -->
+      <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+      <circle cx="32" cy="32" r="23" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.7"/>
+      <circle cx="32" cy="32" r="20" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.7"/>
+      <circle cx="32" cy="32" r="17" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.7"/>
+      <!-- subtle sheen arc -->
+      <path d="M14 22c6-8 18-12 28-8" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.2" stroke-linecap="round"/>
+      <!-- center label -->
+      <circle cx="32" cy="32" r="11" fill="#9a7b4f"/>
+      <circle cx="32" cy="32" r="11" fill="none" stroke="#e2d1b0" stroke-width="0.9" opacity="0.55"/>
+      <circle cx="32" cy="32" r="7.5" fill="#c4a574"/>
+      <!-- spindle hole -->
+      <circle cx="32" cy="32" r="2.2" fill="#0c1220"/>
+      <!-- label highlight -->
+      <circle cx="29" cy="29" r="2.5" fill="rgba(255,255,255,0.18)"/>
+    </svg>
   </button>
   <audio id="bgm" loop preload="none">
     <source src="bg-music.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- LIGHTBOX -->
-  <div id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="preview" />
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="갤러리">
+    <button type="button" class="lb-close" onclick="closeLightbox()" aria-label="닫기">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="lb-stage" id="lb-stage">
+      <button type="button" class="lb-nav prev" onclick="event.stopPropagation(); galleryNav(-1)" aria-label="이전">
+        <i class="fa-solid fa-chevron-left text-sm"></i>
+      </button>
+      <img id="lightbox-img" src="" alt="preview" />
+      <button type="button" class="lb-nav next" onclick="event.stopPropagation(); galleryNav(1)" aria-label="다음">
+        <i class="fa-solid fa-chevron-right text-sm"></i>
+      </button>
+    </div>
+    <div class="lb-meta">
+      <p class="lb-counter" id="lb-counter">1 / 8</p>
+      <div class="lb-dots" id="lb-dots"></div>
+      <p class="lb-hint">Swipe to browse</p>
+    </div>
   </div>
 
   <!-- TOAST -->
@@ -1153,12 +1519,12 @@
     }
 
     /* ========== ENVELOPE OPEN ==========
-       Sequence:
-       0.00s  seal fades, flap starts opening
-       0.35s  card begins rising
-       ~1.5s  card fully readable in center — HOLD
-       2.8s   scene fades
-       3.5s   main invitation shown
+       Sequence (~2.5s total):
+       0.00s  seal cracks + gold sparks, flap starts
+       0.22s  card begins rising
+       ~1.1s  card readable — short hold
+       1.75s  scene fades
+       2.45s  main invitation shown
     */
     function openInvitation(skipAnim) {
       if (opened) return;
@@ -1185,15 +1551,13 @@
       }
 
       if (card) card.setAttribute('aria-hidden', 'false');
-      // start open animation on stage (drives CSS)
       stage.classList.add('opened');
 
-      // hold card readable, then fade to main
       setTimeout(() => {
         stage.classList.add('fading');
-      }, 2800);
+      }, 1750);
 
-      setTimeout(showMain, 3550);
+      setTimeout(showMain, 2450);
     }
 
     function initAos() {
@@ -1251,14 +1615,70 @@
       }
     }
 
+    /* ========== WEDDING DATE / CALENDAR / D-DAY ========== */
+    const WEDDING = {
+      year: 2026,
+      month: 10, // 1-based
+      day: 18,
+      // local noon-ish for display; ICS uses KST 12:30
+    };
+
+    function renderCalendar() {
+      const root = document.getElementById('cal-days');
+      if (!root) return;
+
+      const y = WEDDING.year;
+      const m = WEDDING.month; // 1-based
+      const weddingDay = WEDDING.day;
+      // JS Date month is 0-based; first day of month
+      const firstDow = new Date(y, m - 1, 1).getDay(); // 0=Sun
+      const daysInMonth = new Date(y, m, 0).getDate();
+
+      let html = '';
+      for (let i = 0; i < firstDow; i++) {
+        html += '<div class="cal-day empty"></div>';
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dow = (firstDow + d - 1) % 7;
+        const cls = ['cal-day'];
+        if (dow === 0) cls.push('sun');
+        if (d === weddingDay) cls.push('wedding');
+        html += `<div class="${cls.join(' ')}">${d}</div>`;
+      }
+      root.innerHTML = html;
+    }
+
+    function renderDday() {
+      const label = document.getElementById('dday-label');
+      const sub = document.getElementById('dday-sub');
+      if (!label) return;
+
+      const target = new Date(WEDDING.year, WEDDING.month - 1, WEDDING.day);
+      target.setHours(0, 0, 0, 0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const diff = Math.round((target - today) / 86400000);
+
+      if (diff > 0) {
+        label.innerHTML = 'D-<span>' + diff + '</span>';
+        if (sub) sub.textContent = '예식까지 ' + diff + '일 남았습니다';
+      } else if (diff === 0) {
+        label.innerHTML = '<span>D-DAY</span>';
+        if (sub) sub.textContent = '오늘은 두 사람이 하나가 되는 날입니다';
+      } else {
+        label.innerHTML = 'D+<span>' + Math.abs(diff) + '</span>';
+        if (sub) sub.textContent = '행복한 날로부터 ' + Math.abs(diff) + '일이 지났습니다';
+      }
+    }
+
     function addCalendar() {
       // 2026-10-18 12:30 KST → ICS
       const ics = [
         'BEGIN:VCALENDAR',
         'VERSION:2.0',
-        'PRODID:-//HC Wedding//KR',
+        'PRODID:-//Wedding//KR',
         'BEGIN:VEVENT',
-        'UID:hc-wedding-20261018@invite',
+        'UID:wedding-20261018@invite',
         'DTSTAMP:20260101T000000Z',
         'DTSTART:20261018T033000Z',
         'DTEND:20261018T060000Z',
@@ -1279,13 +1699,146 @@
       toast('캘린더 파일이 저장되었습니다');
     }
 
-    function openLightbox(src) {
+    /* ========== GALLERY LIGHTBOX + SWIPE ========== */
+    const GALLERY_SRCS = [
+      'gallery-1.jpg', 'gallery-2.jpg', 'gallery-3.jpg', 'gallery-4.jpg',
+      'gallery-5.jpg', 'gallery-6.jpg', 'gallery-7.jpg', 'gallery-8.jpg',
+    ];
+    let galleryIdx = 0;
+    let lbTouchX = 0;
+    let lbTouchY = 0;
+    let lbDragging = false;
+    let lbStartX = 0;
+    let lbDeltaX = 0;
+
+    function openLightbox(idx) {
+      galleryIdx = ((idx % GALLERY_SRCS.length) + GALLERY_SRCS.length) % GALLERY_SRCS.length;
       const box = document.getElementById('lightbox');
-      document.getElementById('lightbox-img').src = src;
+      showGalleryImage(false);
       box.classList.add('show');
+      document.body.style.overflow = 'hidden';
     }
+
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('show');
+      document.body.style.overflow = '';
+      const img = document.getElementById('lightbox-img');
+      if (img) {
+        img.style.transform = '';
+        img.classList.remove('swiping');
+      }
+    }
+
+    function showGalleryImage(animate) {
+      const img = document.getElementById('lightbox-img');
+      const counter = document.getElementById('lb-counter');
+      const dots = document.getElementById('lb-dots');
+      if (!img) return;
+
+      if (animate) {
+        img.style.opacity = '0.35';
+        setTimeout(() => {
+          img.src = GALLERY_SRCS[galleryIdx];
+          img.style.opacity = '1';
+          img.style.transform = '';
+        }, 120);
+      } else {
+        img.src = GALLERY_SRCS[galleryIdx];
+        img.style.opacity = '1';
+        img.style.transform = '';
+      }
+
+      if (counter) counter.textContent = (galleryIdx + 1) + ' / ' + GALLERY_SRCS.length;
+      if (dots) {
+        dots.innerHTML = GALLERY_SRCS.map((_, i) =>
+          '<span class="' + (i === galleryIdx ? 'on' : '') + '"></span>'
+        ).join('');
+      }
+    }
+
+    function galleryNav(dir) {
+      galleryIdx = (galleryIdx + dir + GALLERY_SRCS.length) % GALLERY_SRCS.length;
+      showGalleryImage(true);
+    }
+
+    function initLightboxSwipe() {
+      const stage = document.getElementById('lb-stage');
+      const box = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      if (!stage || !box) return;
+
+      function onStart(clientX, clientY) {
+        lbDragging = true;
+        lbStartX = clientX;
+        lbTouchX = clientX;
+        lbTouchY = clientY;
+        lbDeltaX = 0;
+        if (img) img.classList.add('swiping');
+      }
+
+      function onMove(clientX, clientY) {
+        if (!lbDragging || !img) return;
+        lbDeltaX = clientX - lbStartX;
+        const dy = Math.abs(clientY - lbTouchY);
+        if (Math.abs(lbDeltaX) > dy) {
+          img.style.transform = 'translateX(' + lbDeltaX * 0.85 + 'px)';
+          img.style.opacity = String(Math.max(0.35, 1 - Math.abs(lbDeltaX) / 320));
+        }
+      }
+
+      function onEnd() {
+        if (!lbDragging) return;
+        lbDragging = false;
+        if (img) img.classList.remove('swiping');
+
+        const threshold = 56;
+        if (lbDeltaX <= -threshold) {
+          galleryNav(1);
+        } else if (lbDeltaX >= threshold) {
+          galleryNav(-1);
+        } else if (img) {
+          img.style.transform = '';
+          img.style.opacity = '1';
+        }
+        lbDeltaX = 0;
+      }
+
+      stage.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        onStart(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+
+      stage.addEventListener('touchmove', (e) => {
+        if (!lbDragging || e.touches.length !== 1) return;
+        onMove(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive: true });
+
+      stage.addEventListener('touchend', onEnd);
+      stage.addEventListener('touchcancel', onEnd);
+
+      stage.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) return;
+        onStart(e.clientX, e.clientY);
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!lbDragging) return;
+        onMove(e.clientX, e.clientY);
+      });
+      window.addEventListener('mouseup', onEnd);
+
+      // backdrop click closes (not on stage/nav)
+      box.addEventListener('click', (e) => {
+        if (e.target === box || e.target.classList.contains('lb-meta') || e.target.classList.contains('lb-hint') || e.target.classList.contains('lb-counter') || e.target.id === 'lb-dots') {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!box.classList.contains('show')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') galleryNav(-1);
+        if (e.key === 'ArrowRight') galleryNav(1);
+      });
     }
 
     /* BGM */
@@ -1325,6 +1878,9 @@
     /* INIT */
     document.addEventListener('DOMContentLoaded', () => {
       applyPersonalization();
+      renderCalendar();
+      renderDday();
+      initLightboxSwipe();
 
       // optional: auto-skip envelope on revisit (commented for demo polish — keep envelope)
       // try {
