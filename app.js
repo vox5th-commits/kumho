@@ -217,19 +217,19 @@ function startSakura() {
   layer.dataset.ready = '1';
   layer.innerHTML = '';
 
-  const count = 10;
+  const count = 8;
   for (let i = 0; i < count; i++) {
     const p = document.createElement('span');
     const variant = i % 3;
     p.className = 'petal' + (variant === 1 ? ' p2' : variant === 2 ? ' p3' : '');
 
     const left = 6 + Math.random() * 88; // keep inside phone width
-    const delay = Math.random() * 10;
-    const fallDur = 20 + Math.random() * 14; // much slower, gentle
-    const swayDur = 4.5 + Math.random() * 3.5;
-    const size = 9 + Math.random() * 7;
-    const amp = (14 + Math.random() * 28) * (Math.random() < 0.5 ? -1 : 1);
-    const spin = (160 + Math.random() * 200) * (Math.random() < 0.5 ? -1 : 1);
+    const delay = Math.random() * 16;
+    const fallDur = 55 + Math.random() * 30; // ~1/3 speed of previous (~20s)
+    const swayDur = 10 + Math.random() * 6;
+    const size = 9 + Math.random() * 6;
+    const amp = (10 + Math.random() * 22) * (Math.random() < 0.5 ? -1 : 1);
+    const spin = (120 + Math.random() * 160) * (Math.random() < 0.5 ? -1 : 1);
 
     p.style.left = left + '%';
     p.style.width = size + 'px';
