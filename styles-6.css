@@ -1,0 +1,43 @@
+.petal::after {
+  content: '';
+  position: absolute;
+  inset: 18% 22%;
+  border-radius: inherit;
+  background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.55), transparent 70%);
+  pointer-events: none;
+}
+.petal.p2 {
+  border-radius: 0 100% 0 90%;
+  background:
+    radial-gradient(circle at 65% 35%, #fff8f9 0%, transparent 40%),
+    linear-gradient(210deg, #fceef0 0%, #efb0bc 100%);
+}
+.petal.p3 {
+  border-radius: 90% 10% 100% 0;
+  width: 9px;
+  height: 11px;
+  background: linear-gradient(160deg, #f9d4db 0%, #e8a0b0 100%);
+}
+/* fall down the phone column */
+@keyframes petal-fall {
+  0% {
+    top: -8%;
+    opacity: 0;
+  }
+  6% { opacity: 0.72; }
+  85% { opacity: 0.45; }
+  100% {
+    top: 104%;
+    opacity: 0;
+  }
+}
+/* side-to-side flutter + tumble (emotional drift) */
+@keyframes petal-sway {
+  0%   { transform: translateX(0) rotate(0deg) scale(1); }
+  15%  { transform: translateX(calc(var(--amp) * 0.55)) rotate(28deg) scale(1.05); }
+  30%  { transform: translateX(calc(var(--amp) * -0.35)) rotate(-18deg) scale(0.95); }
+  48%  { transform: translateX(calc(var(--amp) * 0.85)) rotate(52deg) scale(1.08); }
+  65%  { transform: translateX(calc(var(--amp) * -0.6)) rotate(-36deg) scale(0.92); }
+  82%  { transform: translateX(calc(var(--amp) * 0.4)) rotate(70deg) scale(1.02); }
+  100% { transform: translateX(calc(var(--amp) * -0.2)) rotate(var(--spin)) scale(0.88); }
+}
