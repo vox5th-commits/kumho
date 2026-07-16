@@ -52,11 +52,11 @@
 
   <!-- ========== ENVELOPE ========== -->
   <div id="envelope-stage">
-    <button class="skip-btn" type="button" onclick="openInvitation(true)">SKIP</button>
+    <button class="skip-btn" type="button" onclick="openInvitation(true)">건너뛰기</button>
 
     <div class="env-scene">
       <p class="env-to">
-        <small>Wedding Invitation</small>
+        <small>초대합니다</small>
         <span id="env-guest-name" class="guest-hand">소중한 분</span>
       </p>
 
@@ -64,10 +64,10 @@
       <div class="env-card" id="env-card" aria-hidden="true">
         <div class="env-card-inner">
           <p class="env-card-guest" id="env-card-guest"></p>
-          <p class="env-card-label">The Wedding of</p>
+          <p class="env-card-label">결혼식에 초대합니다</p>
           <div class="env-card-names">
             <div>형원</div>
-            <div class="env-card-and">and</div>
+            <div class="env-card-and">·</div>
             <div>채희</div>
           </div>
           <div class="env-card-line"></div>
@@ -83,32 +83,18 @@
         <div class="env-side-l"></div>
         <div class="env-side-r"></div>
         <div class="env-flap"><div class="env-flap-face"></div></div>
-        <div class="env-pocket">
-          <div class="env-ornament" aria-hidden="true">
-            <svg viewBox="0 0 64 16" fill="none">
-              <path d="M2 8h18M44 8h18" stroke="currentColor" stroke-width="0.9" opacity="0.7"/>
-              <path d="M26 8h12" stroke="currentColor" stroke-width="0.9" opacity="0.5"/>
-              <path d="M32 2.5l1.6 3.4 3.7.5-2.7 2.6.7 3.6L32 10.8 28.7 12.6l.7-3.6-2.7-2.6 3.7-.5L32 2.5z" fill="currentColor" opacity="0.75"/>
-            </svg>
-            <span>Invite</span>
-          </div>
-        </div>
-        <div class="seal" aria-hidden="true">
-          <div class="seal-drip d1"></div>
-          <div class="seal-drip d2"></div>
-          <div class="seal-crack"></div>
-          <!-- same wax face in 3 clipped shards (looks whole when closed) -->
-          <div class="seal-shard s1"><div class="seal-face"><div class="seal-rim"></div><div class="seal-well"><div class="seal-motif"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="3.2" stroke="currentColor" stroke-width="1.1"/><path d="M16 6.5c1.2 3.2 1.2 6.8 0 10M16 15.5c-1.2 3.2-1.2 6.8 0 10M6.5 16c3.2-1.2 6.8-1.2 10 0M15.5 16c3.2 1.2 6.8 1.2 10 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M9.2 9.2c2.6 2 5.6 2.6 8.6 1.8M22.8 9.2c-2 2.6-2.6 5.6-1.8 8.6M22.8 22.8c-2.6-2-5.6-2.6-8.6-1.8M9.2 22.8c2-2.6 2.6-5.6 1.8-8.6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/></svg></div></div></div></div>
-          <div class="seal-shard s2"><div class="seal-face"><div class="seal-rim"></div><div class="seal-well"><div class="seal-motif"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="3.2" stroke="currentColor" stroke-width="1.1"/><path d="M16 6.5c1.2 3.2 1.2 6.8 0 10M16 15.5c-1.2 3.2-1.2 6.8 0 10M6.5 16c3.2-1.2 6.8-1.2 10 0M15.5 16c3.2 1.2 6.8 1.2 10 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M9.2 9.2c2.6 2 5.6 2.6 8.6 1.8M22.8 9.2c-2 2.6-2.6 5.6-1.8 8.6M22.8 22.8c-2.6-2-5.6-2.6-8.6-1.8M9.2 22.8c2-2.6 2.6-5.6 1.8-8.6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/></svg></div></div></div></div>
-          <div class="seal-shard s3"><div class="seal-face"><div class="seal-rim"></div><div class="seal-well"><div class="seal-motif"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="3.2" stroke="currentColor" stroke-width="1.1"/><path d="M16 6.5c1.2 3.2 1.2 6.8 0 10M16 15.5c-1.2 3.2-1.2 6.8 0 10M6.5 16c3.2-1.2 6.8-1.2 10 0M15.5 16c3.2 1.2 6.8 1.2 10 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/><path d="M9.2 9.2c2.6 2 5.6 2.6 8.6 1.8M22.8 9.2c-2 2.6-2.6 5.6-1.8 8.6M22.8 22.8c-2.6-2-5.6-2.6-8.6-1.8M9.2 22.8c2-2.6 2.6-5.6 1.8-8.6" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" opacity="0.85"/></svg></div></div></div></div>
-          <div class="seal-sparks" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i>
-            <i></i><i></i><i></i><i></i><i></i>
-          </div>
+        <div class="env-pocket"></div>
+        <div class="ribbon-band" aria-hidden="true"></div>
+        <div class="ribbon" aria-hidden="true">
+          <div class="ribbon-tail left"></div>
+          <div class="ribbon-tail right"></div>
+          <div class="ribbon-loop left"></div>
+          <div class="ribbon-loop right"></div>
+          <div class="ribbon-knot"></div>
         </div>
       </div>
 
-      <p class="env-hint" id="env-hint">Tap to open</p>
+      <p class="env-hint" id="env-hint">열어 주세요</p>
     </div>
   </div>
 
@@ -125,28 +111,29 @@
         <div class="hero-fade" aria-hidden="true"></div>
         <div class="hero-overlay"></div>
 
-        <div class="hero-copy absolute inset-x-0 top-0 pt-10 flex justify-center" data-aos="fade-down">
-          <p class="text-gold-light/70 text-[10px] tracking-[0.5em] uppercase font-serif">The Wedding of</p>
+        <div class="hero-copy absolute inset-x-0 top-0 pt-12 flex justify-center" data-aos="fade-down">
+          <p class="text-gold-light/80 text-[11px] tracking-[0.35em] font-serif">결혼식에 초대합니다</p>
         </div>
 
-        <div class="hero-copy absolute bottom-[18%] left-0 right-0 px-8 text-center text-ivory" data-aos="fade-up">
-          <p id="hero-guest-line" class="guest-hand mb-5 hidden"></p>
-          <h1 class="font-serif font-light leading-none mb-3">
-            <span class="block text-5xl tracking-wide drop-shadow-sm">형원</span>
-            <span class="block font-script text-3xl text-gold my-3">and</span>
-            <span class="block text-5xl tracking-wide drop-shadow-sm">채희</span>
+        <div class="hero-copy absolute left-0 right-0 px-8 text-center text-ivory"
+             style="top: 42%; transform: translateY(-50%);" data-aos="fade-up">
+          <p id="hero-guest-line" class="guest-hand mb-4 hidden"></p>
+          <h1 class="hero-names font-serif font-light">
+            <span class="name">형원</span>
+            <span class="sep">·</span>
+            <span class="name">채희</span>
           </h1>
-          <div class="gold-line my-7 opacity-70"></div>
-          <p class="font-serif text-lg tracking-[0.25em] text-gold-light/90">2027. 4. 25 SUN</p>
-          <p class="mt-2 text-sm text-ivory/70 font-light tracking-wide">오후 12시</p>
-          <p class="mt-4 text-xs text-ivory/55 tracking-[0.12em]">포항 포마레 웨딩 컨벤션</p>
+          <div class="gold-line my-6 opacity-70"></div>
+          <p class="font-serif text-base tracking-[0.22em] text-gold-light">2027. 4. 25 · 일요일</p>
+          <p class="mt-2 text-sm text-ivory/80 font-light tracking-wide">오후 12시</p>
+          <p class="mt-3 text-xs text-ivory/65 tracking-[0.1em]">포항 포마레 웨딩 컨벤션</p>
         </div>
       </section>
 
       <!-- INVITE MESSAGE (slight overlap so fade into paper is seamless) -->
       <section class="px-9 pt-10 pb-16 bg-paper -mt-10 relative z-[1]">
         <div class="text-center" data-aos="fade-up">
-          <p class="section-label mb-8">Invitation</p>
+          <p class="section-label mb-8">초대</p>
           <i class="fa-solid fa-quote-left text-gold/40 text-xl mb-5"></i>
           <p id="invite-guest-hand" class="guest-hand-dark mb-4 hidden"></p>
           <h2 class="font-serif text-2xl text-navy mb-8 font-medium tracking-wide">새로운 시작을 알려드립니다</h2>
@@ -160,12 +147,12 @@
           </p>
           <div class="mt-12 flex items-center justify-center gap-6 text-navy">
             <div class="text-center">
-              <p class="text-[10px] tracking-[0.2em] text-soft mb-1">GROOM</p>
+              <p class="text-[10px] tracking-[0.2em] text-soft mb-1">신랑</p>
               <p class="font-serif text-xl tracking-wider">형원</p>
             </div>
             <span class="text-gold text-lg">·</span>
             <div class="text-center">
-              <p class="text-[10px] tracking-[0.2em] text-soft mb-1">BRIDE</p>
+              <p class="text-[10px] tracking-[0.2em] text-soft mb-1">신부</p>
               <p class="font-serif text-xl tracking-wider">채희</p>
             </div>
           </div>
@@ -184,8 +171,8 @@
                 <i class="fa-regular fa-calendar text-sm"></i>
               </div>
               <div>
-                <p class="text-[10px] text-soft tracking-[0.3em] uppercase mb-1">Date &amp; Time</p>
-                <p class="font-serif text-xl text-navy tracking-wide">2027. 4. 25. SUN</p>
+                <p class="text-[10px] text-soft tracking-[0.3em] mb-1">일시</p>
+                <p class="font-serif text-xl text-navy tracking-wide">2027. 4. 25. 일</p>
                 <p class="text-sm text-[#5c574f] mt-0.5">오후 12시</p>
               </div>
             </div>
@@ -195,7 +182,7 @@
                 <i class="fa-solid fa-location-dot text-sm"></i>
               </div>
               <div>
-                <p class="text-[10px] text-soft tracking-[0.3em] uppercase mb-1">Location</p>
+                <p class="text-[10px] text-soft tracking-[0.3em] mb-1">장소</p>
                 <p class="font-serif text-xl text-navy tracking-wide">포마레 웨딩 컨벤션</p>
                 <p class="text-sm text-[#5c574f] mt-0.5">경상북도 포항시</p>
               </div>
@@ -340,9 +327,8 @@
       <!-- ACCOUNT (collapsed) -->
       <section class="px-6 py-16 bg-ivory">
         <div class="text-center mb-8" data-aos="fade-up">
-          <p class="section-label mb-3">Gift</p>
+          <p class="section-label mb-3">마음</p>
           <p class="font-serif text-2xl text-navy tracking-wide">마음 전하실 곳</p>
-          <p class="text-xs text-soft mt-3 leading-relaxed">참석이 어려우신 분들을 위해<br />안내드리며, 강제가 아님을 말씀드립니다.</p>
         </div>
 
         <div class="space-y-3" data-aos="fade-up" id="account-sections">
@@ -350,80 +336,14 @@
         </div>
       </section>
 
-      <!-- RSVP -->
-      <section class="px-6 py-16 bg-paper" id="rsvp-section">
-        <div class="text-center mb-8" data-aos="fade-up">
-          <p class="section-label mb-3">RSVP</p>
-          <p class="font-serif text-2xl text-navy tracking-wide">참석 의사 전달</p>
-          <p class="text-xs text-soft mt-3" id="rsvp-name-hint">편하신 방법으로 알려주시면 감사하겠습니다.</p>
-        </div>
 
-        <form id="rsvp-form" class="bg-white/80 border border-gold/15 rounded-2xl p-7 shadow-[0_12px_40px_-16px_rgba(20,28,43,0.1)] space-y-6" data-aos="fade-up" onsubmit="submitRsvp(event)">
-          <div>
-            <label class="text-[10px] tracking-[0.25em] text-soft uppercase block mb-2">성함</label>
-            <input id="rsvp-name" type="text" required
-                   class="w-full border-b border-gold/30 bg-transparent py-2 text-navy text-sm outline-none focus:border-gold transition"
-                   placeholder="이름을 입력해 주세요" />
-          </div>
-
-          <div>
-            <label class="text-[10px] tracking-[0.25em] text-soft uppercase block mb-3">참석 여부</label>
-            <div class="grid grid-cols-3 gap-2">
-              <label class="rsvp-opt"><input type="radio" name="attend" value="yes" required /><span>참석</span></label>
-              <label class="rsvp-opt"><input type="radio" name="attend" value="no" /><span>불참</span></label>
-              <label class="rsvp-opt"><input type="radio" name="attend" value="maybe" /><span>미정</span></label>
-            </div>
-          </div>
-
-          <div>
-            <label class="text-[10px] tracking-[0.25em] text-soft uppercase block mb-2">동반 인원 (본인 제외)</label>
-            <input id="rsvp-guests" type="number" min="0" max="10" value="0"
-                   class="w-full border-b border-gold/30 bg-transparent py-2 text-navy text-sm outline-none focus:border-gold transition" />
-          </div>
-
-          <div>
-            <label class="text-[10px] tracking-[0.25em] text-soft uppercase block mb-2">전달 메시지 (선택)</label>
-            <textarea id="rsvp-msg" rows="2"
-                      class="w-full border-b border-gold/30 bg-transparent py-2 text-navy text-sm outline-none focus:border-gold transition resize-none"
-                      placeholder="축하 한마디를 남겨 주세요"></textarea>
-          </div>
-
-          <button type="submit" class="btn-gold w-full py-3.5 rounded-xl text-sm font-medium tracking-wider">
-            전달하기
-          </button>
-          <p class="text-[11px] text-center text-soft leading-relaxed">
-            * 현재는 로컬 저장 데모입니다. 실제 수집은 구글폼 연동으로 바꿀 수 있어요.
-          </p>
-        </form>
-
-        <div id="rsvp-done" class="hidden text-center py-12" data-aos="fade-up">
-          <p class="font-script text-3xl text-gold mb-3">Thank you</p>
-          <p class="text-sm text-[#5c574f]">소중한 답변 감사합니다.</p>
-        </div>
-      </section>
-
-      <!-- NOTICE accordion -->
-      <section class="px-9 py-12 bg-ivory border-t border-gold/10">
-        <button type="button" class="w-full flex items-center justify-between py-3" onclick="toggleAcc('notice')">
-          <span class="section-label">Notice</span>
-          <i class="fa-solid fa-chevron-down text-gold text-xs acc-chevron" id="notice-chevron"></i>
-        </button>
-        <div class="acc-body" id="notice-body">
-          <ul class="text-sm text-[#5c574f] leading-relaxed space-y-3 pb-4 pt-2">
-            <li>· 화환은 정중히 사양합니다. 마음만 감사히 받겠습니다.</li>
-            <li>· 예식 중 휴대폰은 무음으로 부탁드립니다.</li>
-            <li>· 복장: 편안한 세미 포멀을 추천드립니다.</li>
-          </ul>
-        </div>
-      </section>
 
       <!-- FOOTER / SHARE -->
       <section class="px-8 py-16 bg-night text-center">
-        <p class="mono-mark text-sm mb-2">H · C</p>
-        <p class="font-script text-3xl text-gold-light/90 mb-2">Thank You</p>
+        <p class="font-serif text-2xl text-gold-light/90 mb-2 tracking-wide">형원 · 채희</p>
         <p class="text-xs text-white/35 font-light mb-10 tracking-wide">소중한 걸음, 잊지 않겠습니다</p>
 
-        <p class="text-white/30 text-[10px] tracking-[0.4em] mb-6">SHARE</p>
+        <p class="text-white/30 text-[10px] tracking-[0.35em] mb-6">공유</p>
         <div class="flex justify-center gap-4">
           <button type="button" onclick="shareInvite()" class="w-12 h-12 rounded-full bg-white/8 text-gold-light flex items-center justify-center hover:bg-gold/20 transition-colors" aria-label="공유">
             <i class="fa-solid fa-share-nodes"></i>
@@ -436,8 +356,8 @@
           </button>
         </div>
 
-        <p class="mt-16 text-[10px] text-white/20 tracking-[0.25em] uppercase">
-          Hyungwon &amp; Chaehee · 2027. 4. 25
+        <p class="mt-16 text-[10px] text-white/20 tracking-[0.2em]">
+          2027. 4. 25
         </p>
       </section>
     </div>
