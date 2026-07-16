@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>형원 ♥ 채희 결혼식에 초대합니다</title>
+  <!-- CACHE_BUST: 20260716c -->
+  <meta name="description" content="신랑 형원 · 신부 채희의 결혼식에 초대합니다." />
+  <meta property="og:title" content="형원 ♥ 채희 결혼식에 초대합니다" />
+  <meta property="og:description" content="소중한 분을 저희 결혼식에 초대합니다." />
+  <meta property="og:image" content="main-photo.jpg" />
+  <meta property="og:type" content="website" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#1a1a1a',
+            night: '#0c1220',
+            navy: '#141c2b',
+            ivory: '#f7f3ec',
+            paper: '#fbf8f3',
+            gold: '#c4a574',
+            'gold-light': '#e2d1b0',
+            'gold-dark': '#9a7b4f',
+            soft: '#8a857c',
+            blossom: '#f3c4cb',
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            script: ['"Great Vibes"', 'cursive'],
+            pen: ['"Nanum Pen Script"', 'cursive'],
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="styles.css?v=20260716c" />
+</head>
+<body class="locked antialiased">
+
+  <!-- ========== ENVELOPE ========== -->
+  <div id="envelope-stage">
+    <button class="skip-btn" type="button" onclick="openInvitation(true)">건너뛰기</button>
+
+    <div class="env-scene">
+      <p class="env-to">
+        <small>초대합니다</small>
+        <span id="env-guest-name" class="guest-hand">소중한 분</span>
+      </p>
+
+      <!-- reveal card (rises out of envelope on open) -->
+      <div class="env-card" id="env-card" aria-hidden="true">
+        <div class="env-card-inner">
+          <p class="env-card-guest" id="env-card-guest"></p>
+          <p class="env-card-label">결혼식에 초대합니다</p>
+          <div class="env-card-names">
+            <div>형원</div>
+            <div class="env-card-and">·</div>
+            <div>채희</div>
+          </div>
+          <div class="env-card-line"></div>
+          <p class="env-card-date">2027. 4. 25</p>
+          <p class="env-card-msg" id="env-card-msg">저희 결혼식에<br />초대합니다</p>
+        </div>
+      </div>
+
+      <div class="mail" id="envelope" onclick="openInvitation(false)" role="button" aria-label="초대장 열기">
+        <div class="mail-shadow"></div>
+        <div class="mail-body"></div>
+        <div class="mail-flap"><div class="mail-flap-inner"></div></div>
+        <div class="mail-pocket"></div>
+        <div class="mail-band" aria-hidden="true"></div>
+        <div class="mail-bow" aria-hidden="true">
+          <div class="tail l"></div>
+          <div class="tail r"></div>
+          <div class="loop l"></div>
+          <div class="loop r"></div>
+          <div class="knot"></div>
+        </div>
+      </div>
+
+      <p class="env-hint" id="env-hint">열어 주세요</p>
+    </div>
+  </div>
+
+  <!-- ========== MAIN ========== -->
+  <div id="main-app">
+    <div class="phone">
+      <!-- sakura only inside phone (mobile frame) -->
+      <div id="sakura-layer" aria-hidden="true"></div>
+
+      <!-- HERO -->
+      <section class="hero-section relative h-[92vh] min-h-[560px]">
+        <div class="hero-photo"
+             style="background-image: url('main-photo.jpg');"></div>
+        <div class="hero-fade" aria-hidden="true"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-copy absolute inset-x-0 top-0 pt-12 flex justify-center" data-aos="fade-down">
+          <p class="text-gold-light/80 text-[11px] tracking-[0.35em] font-serif">결혼식에 초대합니다</p>
+        </div>
+
+        <div class="hero-copy absolute left-0 right-0 px-8 text-center text-ivory"
+             style="top: 42%; transform: translateY(-50%);" data-aos="fade-up">
+          <p id="hero-guest-line" class="guest-hand mb-4 hidden"></p>
+          <h1 class="hero-names font-serif font-light">
+            <span class="name">형원</span>
+            <span class="sep">·</span>
+            <span class="name">채희</span>
+          </h1>
+          <div class="gold-line my-6 opacity-70"></div>
+          <p class="font-serif text-base tracking-[0.22em] text-gold-light">2027. 4. 25 · 일요일</p>
+          <p class="mt-2 text-sm text-ivory/80 font-light tracking-wide">오후 12시</p>
+          <p class="mt-3 text-xs text-ivory/65 tracking-[0.1em]">포항 포마레 웨딩 컨벤션</p>
+        </div>
+      </section>
+
+      <!-- INVITE MESSAGE (slight overlap so fade into paper is seamless) -->
+      <section class="px-9 pt-10 pb-16 bg-paper -mt-10 relative z-[1]">
+        <div class="text-center" data-aos="fade-up">
+          <p class="section-label mb-8">초대</p>
+          <i class="fa-solid fa-quote-left text-gold/40 text-xl mb-5"></i>
+          <p id="invite-guest-hand" class="guest-hand-dark mb-4 hidden"></p>
+          <h2 class="font-serif text-2xl text-navy mb-8 font-medium tracking-wide">새로운 시작을 알려드립니다</h2>
+          <p id="invite-greeting" class="text-[15px] leading-[2] text-[#5c574f] font-light">
+            서로가 마주 보며 다져온 사랑을<br />
+            이제 함께 한 곳을 바라보며<br />
+            걸어가고자 합니다.<br /><br />
+            저희 두 사람이 사랑의 이름으로<br />
+            지켜나갈 모든 날을 축복해 주시면<br />
+            더없는 기쁨으로 간직하겠습니다.
+          </p>
+          <div class="mt-12 flex items-center justify-center gap-6 text-navy">
+            <div class="text-center">
+              <p class="text-[10px] tracking-[0.2em] text-soft mb-1">신랑</p>
+              <p class="font-serif text-xl tracking-wider">형원</p>
+            </div>
+            <span class="text-gold text-lg">·</span>
+            <div class="text-center">
+              <p class="text-[10px] tracking-[0.2em] text-soft mb-1">신부</p>
+              <p class="font-serif text-xl tracking-wider">채희</p>
+            </div>
+          </div>
+          <p class="mt-8 text-sm text-soft font-light" id="parents-line">
+            <!-- 혼주 정보는 추후 입력 -->
+          </p>
+        </div>
+      </section>
+
+      <!-- DATE & LOCATION -->
+      <section class="px-6 pb-20 bg-gradient-to-b from-paper to-ivory">
+        <div class="bg-white/80 rounded-2xl p-8 shadow-[0_16px_48px_-12px_rgba(20,28,43,0.1)] border border-gold/15" data-aos="fade-up">
+          <div class="space-y-8">
+            <div class="flex items-start gap-5">
+              <div class="w-11 h-11 rounded-full bg-navy flex items-center justify-center text-gold-light shrink-0">
+                <i class="fa-regular fa-calendar text-sm"></i>
+              </div>
+              <div>
+                <p class="text-[10px] text-soft tracking-[0.3em] mb-1">일시</p>
+                <p class="font-serif text-xl text-navy tracking-wide">2027. 4. 25. 일</p>
+                <p class="text-sm text-[#5c574f] mt-0.5">오후 12시</p>
+              </div>
+            </div>
+            <div class="h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
+            <div class="flex items-start gap-5">
+              <div class="w-11 h-11 rounded-full bg-navy flex items-center justify-center text-gold-light shrink-0">
+                <i class="fa-solid fa-location-dot text-sm"></i>
+              </div>
+              <div>
+                <p class="text-[10px] text-soft tracking-[0.3em] mb-1">장소</p>
+                <p class="font-serif text-xl text-navy tracking-wide">포마레 웨딩 컨벤션</p>
+                <p class="text-sm text-[#5c574f] mt-0.5">경상북도 포항시</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- map preview -->
+          <div class="map-card mt-8" data-aos="fade-up">
+            <div class="map-frame">
+              <iframe
+                title="포항 포마레 웨딩 컨벤션 지도"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://maps.google.com/maps?q=%ED%8F%AC%ED%95%AD%20%ED%8F%AC%EB%A7%88%EB%A0%88%20%EC%9B%A8%EB%94%A9%20%EC%BB%A8%EB%B2%A4%EC%85%98&hl=ko&z=15&output=embed">
+              </iframe>
+            </div>
+            <div class="px-5 py-4">
+              <p class="font-serif text-base text-navy tracking-wide">포마레 웨딩 컨벤션</p>
+              <p class="text-xs text-soft mt-1 leading-relaxed">경상북도 포항시 · 지도 핀 위치를 확인해 주세요</p>
+              <div class="mt-4 grid grid-cols-3 gap-2">
+                <a class="nav-chip" href="https://map.kakao.com/?q=포항%20포마레%20웨딩%20컨벤션" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-location-arrow text-[10px] text-gold"></i>카카오
+                </a>
+                <a class="nav-chip" href="https://map.naver.com/v5/search/포항%20포마레%20웨딩%20컨벤션" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-map text-[10px] text-gold"></i>네이버
+                </a>
+                <a class="nav-chip" href="https://www.google.com/maps/search/?api=1&query=포항+포마레+웨딩+컨벤션" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-compass text-[10px] text-gold"></i>구글
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 space-y-3">
+            <a href="https://map.kakao.com/?q=포항%20포마레%20웨딩%20컨벤션" target="_blank" rel="noopener"
+               class="btn-gold w-full py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 tracking-wide">
+              <i class="fa-solid fa-map text-gold text-xs"></i> 카카오맵 길찾기
+            </a>
+            <a href="tel:0540000000"
+               class="btn-outline w-full py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2">
+              <i class="fa-solid fa-phone text-xs"></i> 예식장 전화
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALENDAR & D-DAY -->
+      <section class="px-6 py-16 bg-paper">
+        <div class="text-center mb-10" data-aos="fade-up">
+          <p class="section-label mb-3">Calendar</p>
+          <p class="font-serif text-2xl text-navy tracking-wide">예식 일정</p>
+        </div>
+
+        <div class="bg-white/80 border border-gold/15 rounded-2xl p-7 shadow-[0_12px_40px_-16px_rgba(20,28,43,0.1)]" data-aos="fade-up">
+          <div class="text-center mb-6">
+            <p class="font-serif text-lg text-navy tracking-[0.2em]">2027. 4</p>
+            <p class="text-xs text-soft mt-1 tracking-wide">오후 12시 · 일요일</p>
+          </div>
+
+          <div class="cal-wrap mb-8">
+            <div class="cal-grid mb-1">
+              <div class="cal-dow sun">일</div>
+              <div class="cal-dow">월</div>
+              <div class="cal-dow">화</div>
+              <div class="cal-dow">수</div>
+              <div class="cal-dow">목</div>
+              <div class="cal-dow">금</div>
+              <div class="cal-dow">토</div>
+            </div>
+            <div class="cal-grid" id="cal-days"></div>
+          </div>
+
+          <div class="h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent mb-7"></div>
+
+          <div class="text-center">
+            <p class="text-[10px] tracking-[0.35em] text-soft uppercase mb-3">D-Day</p>
+            <p class="dday-num" id="dday-label">D-<span>—</span></p>
+            <p class="text-sm text-[#5c574f] mt-3 font-light" id="dday-sub">2027년 4월 25일</p>
+          </div>
+
+          <button type="button" onclick="addCalendar()"
+                  class="btn-outline w-full mt-8 py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2">
+            <i class="fa-regular fa-calendar-plus text-xs"></i> 내 캘린더에 저장
+          </button>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="px-6 py-16 bg-ivory">
+        <div class="text-center mb-10" data-aos="fade-up">
+          <p class="section-label mb-3">Gallery</p>
+          <p class="font-serif text-2xl text-navy tracking-wide">우리의 순간</p>
+        </div>
+        <div class="gallery-grid" data-aos="fade-up" id="gallery-grid">
+          <div class="tall aspect-[3/4] overflow-hidden bg-navy/5">
+            <img src="gallery-1.jpg" alt="gallery" data-gallery-idx="0" onclick="openLightbox(0)" loading="lazy" />
+          </div>
+          <div class="aspect-square overflow-hidden bg-navy/5">
+            <img src="gallery-2.jpg" alt="gallery" data-gallery-idx="1" onclick="openLightbox(1)" loading="lazy" />
+          </div>
+          <div class="aspect-square overflow-hidden bg-navy/5">
+            <img src="gallery-3.jpg" alt="gallery" data-gallery-idx="2" onclick="openLightbox(2)" loading="lazy" />
+          </div>
+          <div class="aspect-[4/3] overflow-hidden bg-navy/5">
+            <img src="gallery-4.jpg" alt="gallery" data-gallery-idx="3" onclick="openLightbox(3)" loading="lazy" />
+          </div>
+          <div class="aspect-[4/3] overflow-hidden bg-navy/5">
+            <img src="gallery-5.jpg" alt="gallery" data-gallery-idx="4" onclick="openLightbox(4)" loading="lazy" />
+          </div>
+          <div class="tall aspect-[3/4] overflow-hidden bg-navy/5">
+            <img src="gallery-6.jpg" alt="gallery" data-gallery-idx="5" onclick="openLightbox(5)" loading="lazy" />
+          </div>
+          <div class="aspect-square overflow-hidden bg-navy/5">
+            <img src="gallery-7.jpg" alt="gallery" data-gallery-idx="6" onclick="openLightbox(6)" loading="lazy" />
+          </div>
+          <div class="aspect-square overflow-hidden bg-navy/5">
+            <img src="gallery-8.jpg" alt="gallery" data-gallery-idx="7" onclick="openLightbox(7)" loading="lazy" />
+          </div>
+        </div>
+        <p class="text-center text-[11px] text-soft mt-5 tracking-wide">사진을 누르면 크게 볼 수 있어요 · 스와이프로 넘기기</p>
+      </section>
+
+      <!-- DIRECTIONS -->
+      <section class="px-9 py-16 bg-paper">
+        <p class="section-label mb-8" data-aos="fade-right">Directions</p>
+        <div data-aos="fade-up" class="space-y-6">
+          <div class="gold-hair pl-5">
+            <h4 class="font-serif text-lg text-navy mb-1">자가용</h4>
+            <p class="text-sm text-[#5c574f] leading-relaxed">예식장 지하 주차장 이용 가능<br />2시간 무료 (추후 확정 안내)</p>
+          </div>
+          <div class="gold-hair pl-5">
+            <h4 class="font-serif text-lg text-navy mb-1">대중교통</h4>
+            <p class="text-sm text-[#5c574f] leading-relaxed">포항 시내 · 예식장 주변 대중교통 이용<br />(상세 노선은 추후 안내)</p>
+          </div>
+          <div class="gold-hair pl-5">
+            <h4 class="font-serif text-lg text-navy mb-1">셔틀버스</h4>
+            <p class="text-sm text-[#5c574f] leading-relaxed">역 앞 셔틀 운영 여부 — 추후 안내</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACCOUNT (collapsed) -->
+      <section class="px-6 py-16 bg-ivory">
+        <div class="text-center mb-8" data-aos="fade-up">
+          <p class="section-label mb-3">마음</p>
+          <p class="font-serif text-2xl text-navy tracking-wide">마음 전하실 곳</p>
+        </div>
+
+        <div class="space-y-3" data-aos="fade-up" id="account-sections">
+          <!-- filled by JS based on side -->
+        </div>
+      </section>
+
+
+
+      <!-- FOOTER / SHARE -->
+      <section class="px-8 py-16 bg-night text-center">
+        <p class="font-serif text-2xl text-gold-light/90 mb-2 tracking-wide">형원 · 채희</p>
+        <p class="text-xs text-white/35 font-light mb-10 tracking-wide">소중한 걸음, 잊지 않겠습니다</p>
+
+        <p class="text-white/30 text-[10px] tracking-[0.35em] mb-6">공유</p>
+        <div class="flex justify-center gap-4">
+          <button type="button" onclick="shareInvite()" class="w-12 h-12 rounded-full bg-white/8 text-gold-light flex items-center justify-center hover:bg-gold/20 transition-colors" aria-label="공유">
+            <i class="fa-solid fa-share-nodes"></i>
+          </button>
+          <button type="button" onclick="copyLink()" class="w-12 h-12 rounded-full bg-white/8 text-gold-light flex items-center justify-center hover:bg-gold/20 transition-colors" aria-label="링크 복사">
+            <i class="fa-solid fa-link"></i>
+          </button>
+          <button type="button" onclick="addCalendar()" class="w-12 h-12 rounded-full bg-white/8 text-gold-light flex items-center justify-center hover:bg-gold/20 transition-colors" aria-label="캘린더">
+            <i class="fa-regular fa-calendar-check"></i>
+          </button>
+        </div>
+
+        <p class="mt-16 text-[10px] text-white/20 tracking-[0.2em]">
+          2027. 4. 25
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <!-- BGM -->
+  <button type="button" id="bgm-btn" onclick="toggleBgm()" aria-label="배경음악">
+    <svg class="lp" viewBox="0 0 64 64" aria-hidden="true">
+      <!-- vinyl body -->
+      <circle cx="32" cy="32" r="30" fill="#121212"/>
+      <circle cx="32" cy="32" r="30" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+      <!-- grooves (asymmetric arcs — spin is readable) -->
+      <path d="M32 6.5 A25.5 25.5 0 0 1 56 28" fill="none" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+      <path d="M10 38 A23 23 0 0 1 40 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.9"/>
+      <path d="M14 48 A22 22 0 0 1 52 40" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.9"/>
+      <path d="M20 12 A18 18 0 0 1 50 22" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
+      <!-- bright reflection wedge -->
+      <path d="M32 8 A24 24 0 0 1 52 20 L44 28 A14 14 0 0 0 32 18 Z" fill="rgba(255,255,255,0.14)"/>
+      <!-- center label (off-center marks) -->
+      <circle cx="32" cy="32" r="12" fill="#a8844f"/>
+      <circle cx="32" cy="32" r="12" fill="none" stroke="#f0e0c0" stroke-width="1.1"/>
+      <circle cx="32" cy="32" r="8.2" fill="#c4a574"/>
+      <!-- label typography mark — breaks radial symmetry -->
+      <line x1="26" y1="30" x2="38" y2="30" stroke="#2a2014" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+      <line x1="28" y1="34.5" x2="36" y2="34.5" stroke="#2a2014" stroke-width="1.1" stroke-linecap="round" opacity="0.4"/>
+      <circle cx="36.5" cy="27.5" r="1.6" fill="#f5ead0" opacity="0.9"/>
+      <!-- spindle -->
+      <circle cx="32" cy="32" r="2.4" fill="#0c1220"/>
+      <circle cx="32" cy="32" r="1.1" fill="#3a342c"/>
+    </svg>
+  </button>
+  <audio id="bgm" loop preload="none">
+    <source src="bg-music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="갤러리">
+    <button type="button" class="lb-close" onclick="closeLightbox()" aria-label="닫기">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="lb-stage" id="lb-stage">
+      <button type="button" class="lb-nav prev" onclick="event.stopPropagation(); galleryNav(-1)" aria-label="이전">
+        <i class="fa-solid fa-chevron-left text-sm"></i>
+      </button>
+      <img id="lightbox-img" src="" alt="preview" />
+      <button type="button" class="lb-nav next" onclick="event.stopPropagation(); galleryNav(1)" aria-label="다음">
+        <i class="fa-solid fa-chevron-right text-sm"></i>
+      </button>
+    </div>
+    <div class="lb-meta">
+      <p class="lb-counter" id="lb-counter">1 / 8</p>
+      <div class="lb-dots" id="lb-dots"></div>
+      <p class="lb-hint">Swipe to browse</p>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast"></div>
+
+    <script src="app.js?v=20260716c"></script>
+
+</body>
+</html>
