@@ -114,393 +114,223 @@ body.locked { overflow: hidden; height: 100vh; }
   opacity: 0;
 }
 
-/* envelope shell */
+/* ========== SIMPLE BEIGE ENVELOPE ========== */
 .env-wrap {
   position: relative;
   width: 100%;
-  max-width: 328px;
-  height: 218px;
-  perspective: 1400px;
+  max-width: 320px;
+  height: 210px;
+  perspective: 1200px;
   cursor: pointer;
   z-index: 2;
-  transition: opacity 0.55s ease 0.15s, transform 0.55s ease 0.15s, filter 0.55s ease 0.15s;
+  transition: opacity 0.55s ease 0.2s, transform 0.55s ease 0.2s;
 }
 #envelope-stage.opened .env-wrap {
-  opacity: 0.4;
-  transform: translateY(18px) scale(0.96);
+  opacity: 0.35;
+  transform: translateY(16px) scale(0.97);
   pointer-events: none;
-  filter: brightness(0.94);
 }
 
 .env-shadow {
   position: absolute;
-  bottom: -18px;
-  left: 10%;
-  width: 80%;
-  height: 26px;
-  background: radial-gradient(ellipse, rgba(0,0,0,0.48) 0%, transparent 72%);
-  filter: blur(6px);
+  bottom: -16px;
+  left: 12%;
+  width: 76%;
+  height: 22px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.4) 0%, transparent 70%);
+  filter: blur(5px);
 }
 
-/* back panel — clean bright beige + soft gold edge */
-.env-back {
+/* body rectangle */
+.env-body {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(150deg, rgba(255,255,255,0.7) 0%, transparent 45%),
-    linear-gradient(165deg, #faf6ef 0%, #f3ebe0 50%, #ebe2d4 100%);
-  border-radius: 5px 5px 8px 8px;
+  border-radius: 4px 4px 6px 6px;
+  background: linear-gradient(165deg, #f7f1e6 0%, #efe5d6 55%, #e8dccb 100%);
   box-shadow:
-    0 18px 40px rgba(0,0,0,0.28),
-    inset 0 1px 0 rgba(255,255,255,0.85),
-    inset 0 0 0 1px rgba(196,165,116,0.28);
+    0 16px 36px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.75);
   z-index: 1;
 }
 
-/* inner liner — soft beige */
-.env-liner {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  top: 12px;
-  bottom: 12px;
-  background: linear-gradient(180deg, #f8f3ea 0%, #f0e8db 100%);
-  border: 1px solid rgba(196,165,116,0.14);
-  border-radius: 2px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* reveal card — fixed; hidden when closed, rises to screen center on open */
-.env-card {
-  position: fixed;
-  left: 50%;
-  top: 54%;
-  width: min(86vw, 300px);
-  height: min(58vh, 360px);
-  background:
-    linear-gradient(180deg, #fbf8f3 0%, #f3ede3 100%);
-  border-radius: 3px;
-  box-shadow:
-    0 24px 48px rgba(0,0,0,0.35),
-    inset 0 0 0 1px rgba(196,165,116,0.35);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 24px 20px;
-  z-index: 12;
-  /* tucked under envelope area, fully invisible */
-  transform: translate(-50%, 28%) scale(0.88);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    transform 1.45s cubic-bezier(0.22, 1, 0.36, 1) 0.75s,
-    opacity 0.7s ease 0.8s,
-    visibility 0s linear 0.75s,
-    box-shadow 0.8s ease;
-}
-#envelope-stage.opened .env-card {
-  /* screen center — readable hold */
-  top: 48%;
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-  visibility: visible;
-  box-shadow:
-    0 28px 60px rgba(0,0,0,0.42),
-    inset 0 0 0 1px rgba(196,165,116,0.4);
-  z-index: 25;
-}
-
-.env-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(196,165,116,0.28);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 16px;
-}
-.env-card-guest {
-  font-family: Pretendard, sans-serif;
-  font-size: 12px;
-  color: #8a857c;
-  letter-spacing: 0.08em;
-  margin-bottom: 18px;
-  min-height: 1.2em;
-}
-.env-card-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 11px;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: #9a7b4f;
-  margin-bottom: 14px;
-}
-.env-card-names {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 1.15;
-  color: #141c2b;
-  letter-spacing: 0.06em;
-}
-.env-card-and {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 18px;
-  color: #c4a574;
-  margin: 8px 0;
-  letter-spacing: 0.2em;
-}
-.env-card-line {
-  width: 36px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #c4a574, transparent);
-  margin: 18px 0 14px;
-}
-.env-card-date {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px;
-  letter-spacing: 0.22em;
-  color: #5c574f;
-}
-.env-card-msg {
-  margin-top: 16px;
-  font-size: 12px;
-  color: #8a857c;
-  line-height: 1.7;
-  font-weight: 300;
-}
-
-/* top flap — closed covers entire top; solid triangle */
+/* top flap (triangle) */
 .env-flap {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  height: 52%;
+  height: 50%;
   z-index: 5;
   transform-origin: top center;
   transform: rotateX(0deg);
-  transition: transform 1.2s cubic-bezier(0.33, 0.05, 0.2, 1) 0.55s;
+  transition: transform 1.15s cubic-bezier(0.33, 0.08, 0.2, 1) 0.5s;
   pointer-events: none;
-  /* keep 3d flip looking solid */
   backface-visibility: hidden;
 }
 #envelope-stage.opened .env-flap {
-  transform: rotateX(175deg);
+  transform: rotateX(172deg);
   z-index: 1;
 }
 .env-flap-face {
   width: 100%;
   height: 100%;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 40%),
-    linear-gradient(180deg, #faf6ef 0%, #efe6d8 100%);
+  background: linear-gradient(180deg, #faf5ec 0%, #efe4d4 100%);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  box-shadow: 0 6px 12px rgba(80,60,30,0.08);
-  border-top: 1px solid rgba(196,165,116,0.28);
-  position: relative;
-}
-/* subtle gold edge along flap V */
-.env-flap-face::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  background:
-    linear-gradient(135deg, transparent 49%, rgba(196,165,116,0.35) 50%, transparent 51%),
-    linear-gradient(225deg, transparent 49%, rgba(196,165,116,0.35) 50%, transparent 51%);
-  pointer-events: none;
-  opacity: 0.7;
-}
-/* solid side panels so no gap leaks at V edges when closed */
-.env-side-l,
-.env-side-r {
-  position: absolute;
-  top: 0;
-  width: 52%;
-  height: 52%;
-  z-index: 4;
-  pointer-events: none;
-  background: linear-gradient(180deg, #f3ebe0 0%, #e9dfd0 100%);
-}
-.env-side-l {
-  left: 0;
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-.env-side-r {
-  right: 0;
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  box-shadow: 0 4px 10px rgba(90, 60, 30, 0.08);
 }
 
-/* front pocket — bright beige, light gold line only */
-.env-pocket {
+/* front pocket (V cut) */
+.env-front {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 62%;
+  height: 58%;
   z-index: 6;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.45) 0%, transparent 30%),
-    linear-gradient(180deg, #f7f1e7 0%, #efe5d6 55%, #e8dfd0 100%);
-  clip-path: polygon(0 38%, 50% 0, 100% 38%, 100% 100%, 0 100%);
-  box-shadow:
-    inset 0 10px 16px rgba(120,90,50,0.04),
-    inset 0 0 0 1px rgba(196,165,116,0.18);
+  background: linear-gradient(180deg, #f5eee3 0%, #ebe0d0 100%);
+  clip-path: polygon(0 42%, 50% 0, 100% 42%, 100% 100%, 0 100%);
+  box-shadow: inset 0 8px 14px rgba(100, 70, 40, 0.05);
 }
-.env-pocket::before {
+/* soft fold line on pocket */
+.env-front::before {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  height: 38%;
+  height: 42%;
   background:
-    linear-gradient(135deg, transparent 49.4%, rgba(196,165,116,0.32) 50%, transparent 50.6%),
-    linear-gradient(225deg, transparent 49.4%, rgba(196,165,116,0.32) 50%, transparent 50.6%);
+    linear-gradient(135deg, transparent 49.5%, rgba(180, 150, 110, 0.28) 50%, transparent 50.5%),
+    linear-gradient(225deg, transparent 49.5%, rgba(180, 150, 110, 0.28) 50%, transparent 50.5%);
   pointer-events: none;
 }
-.env-pocket::after {
-  content: '';
+
+/* red silk ribbon band */
+.ribbon-band {
   position: absolute;
-  left: 22%;
-  right: 22%;
-  bottom: 20%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(196,165,116,0.35), transparent);
+  left: -6%;
+  right: -6%;
+  top: 38%;
+  height: 16px;
+  z-index: 8;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.28) 0%, transparent 45%),
+    linear-gradient(90deg, #8e1f2c 0%, #c23a48 18%, #d94a58 50%, #c23a48 82%, #8e1f2c 100%);
+  box-shadow:
+    0 2px 5px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.3),
+    inset 0 -1px 0 rgba(60,10,15,0.2);
+  transition: opacity 0.75s ease 0.35s, transform 0.9s ease 0.2s;
+}
+#envelope-stage.opened .ribbon-band {
+  opacity: 0;
+  transform: scaleX(0.94);
 }
 
-/* silk ribbon bow (unties on open) */
+/* red silk bow */
 .ribbon {
   position: absolute;
   left: 50%;
-  top: 36%;
+  top: 38%;
   transform: translate(-50%, -50%);
   z-index: 9;
-  width: 140px;
-  height: 78px;
+  width: 120px;
+  height: 72px;
   pointer-events: none;
-}
-.ribbon-tail {
-  position: absolute;
-  top: 38px;
-  width: 18px;
-  height: 52px;
-  background:
-    linear-gradient(180deg, #c9a96a 0%, #b8944f 45%, #a07d3e 100%);
-  box-shadow:
-    inset 1px 0 0 rgba(255,255,255,0.35),
-    inset -1px 0 0 rgba(80,50,10,0.15),
-    0 2px 6px rgba(0,0,0,0.12);
-  transition:
-    transform 1.15s cubic-bezier(0.33, 0.1, 0.2, 1) 0.12s,
-    opacity 0.9s ease 0.25s;
-}
-.ribbon-tail.left {
-  left: 42px;
-  border-radius: 2px 2px 40% 60%;
-  transform-origin: top center;
-  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
-}
-.ribbon-tail.right {
-  right: 42px;
-  border-radius: 2px 2px 60% 40%;
-  transform-origin: top center;
-  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
-}
-#envelope-stage.opened .ribbon-tail.left {
-  transform: translate(-36px, 18px) rotate(-28deg);
-  opacity: 0;
-}
-#envelope-stage.opened .ribbon-tail.right {
-  transform: translate(36px, 18px) rotate(28deg);
-  opacity: 0;
 }
 .ribbon-loop {
   position: absolute;
-  top: 10px;
-  width: 36px;
-  height: 30px;
+  top: 8px;
+  width: 34px;
+  height: 28px;
   background:
-    radial-gradient(ellipse at 40% 35%, rgba(255,255,255,0.45) 0%, transparent 55%),
-    linear-gradient(160deg, #d4b978 0%, #c4a574 40%, #a88b4a 100%);
-  border-radius: 50% 50% 45% 45%;
+    radial-gradient(ellipse at 38% 32%, rgba(255,220,220,0.45) 0%, transparent 52%),
+    linear-gradient(155deg, #e0606c 0%, #c23a48 42%, #8e1f2c 100%);
+  border-radius: 50% 50% 48% 48%;
   box-shadow:
-    inset 0 2px 3px rgba(255,255,255,0.4),
-    inset 0 -2px 4px rgba(80,50,10,0.2),
-    0 2px 5px rgba(0,0,0,0.12);
+    inset 0 2px 3px rgba(255,255,255,0.35),
+    inset 0 -2px 4px rgba(60,10,15,0.25),
+    0 2px 5px rgba(0,0,0,0.15);
   transition:
     transform 1.05s cubic-bezier(0.33, 0.1, 0.2, 1) 0.05s,
     opacity 0.85s ease 0.18s;
 }
 .ribbon-loop.left {
-  left: 28px;
+  left: 22px;
   transform-origin: right center;
-  transform: rotate(-18deg);
+  transform: rotate(-16deg);
 }
 .ribbon-loop.right {
-  right: 28px;
+  right: 22px;
   transform-origin: left center;
-  transform: rotate(18deg);
+  transform: rotate(16deg);
 }
 #envelope-stage.opened .ribbon-loop.left {
-  transform: translate(-48px, -8px) rotate(-55deg) scale(0.85);
+  transform: translate(-42px, -6px) rotate(-50deg) scale(0.88);
   opacity: 0;
 }
 #envelope-stage.opened .ribbon-loop.right {
-  transform: translate(48px, -8px) rotate(55deg) scale(0.85);
+  transform: translate(42px, -6px) rotate(50deg) scale(0.88);
   opacity: 0;
 }
 .ribbon-knot {
   position: absolute;
   left: 50%;
-  top: 22px;
+  top: 16px;
   transform: translateX(-50%);
-  width: 22px;
-  height: 20px;
+  width: 20px;
+  height: 18px;
   border-radius: 40%;
   background:
-    radial-gradient(circle at 35% 30%, rgba(255,255,255,0.5) 0%, transparent 50%),
-    linear-gradient(180deg, #d8c08a 0%, #b8944f 55%, #9a7b4f 100%);
+    radial-gradient(circle at 35% 30%, rgba(255,220,220,0.5) 0%, transparent 50%),
+    linear-gradient(180deg, #d94a58 0%, #b02e3c 55%, #7a1822 100%);
   box-shadow:
-    0 2px 6px rgba(0,0,0,0.18),
-    inset 0 1px 2px rgba(255,255,255,0.45);
+    0 2px 5px rgba(0,0,0,0.2),
+    inset 0 1px 2px rgba(255,255,255,0.4);
   z-index: 2;
   transition:
     transform 1s cubic-bezier(0.33, 0.1, 0.2, 1) 0.08s,
     opacity 0.8s ease 0.2s;
 }
 #envelope-stage.opened .ribbon-knot {
-  transform: translateX(-50%) translateY(10px) scale(0.6);
+  transform: translateX(-50%) translateY(8px) scale(0.55);
   opacity: 0;
 }
-/* horizontal band across pocket */
-.ribbon-band {
+.ribbon-tail {
   position: absolute;
-  left: -8%;
-  right: -8%;
-  top: 36%;
-  height: 14px;
-  z-index: 7;
-  pointer-events: none;
+  top: 34px;
+  width: 16px;
+  height: 40px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.35) 0%, transparent 40%),
-    linear-gradient(90deg, #c9a96a 0%, #d4b978 20%, #b8944f 50%, #d4b978 80%, #c9a96a 100%);
+    linear-gradient(180deg, #d94a58 0%, #c23a48 40%, #8e1f2c 100%);
   box-shadow:
-    0 1px 3px rgba(0,0,0,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.35),
-    inset 0 -1px 0 rgba(80,50,10,0.12);
-  transition: opacity 0.7s ease 0.35s, transform 0.9s ease 0.2s;
+    inset 1px 0 0 rgba(255,255,255,0.25),
+    inset -1px 0 0 rgba(60,10,15,0.2),
+    0 2px 4px rgba(0,0,0,0.12);
+  transition:
+    transform 1.15s cubic-bezier(0.33, 0.1, 0.2, 1) 0.12s,
+    opacity 0.9s ease 0.25s;
 }
-#envelope-stage.opened .ribbon-band {
+.ribbon-tail.left {
+  left: 38px;
+  border-radius: 2px 2px 45% 55%;
+  transform-origin: top center;
+  clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
+}
+.ribbon-tail.right {
+  right: 38px;
+  border-radius: 2px 2px 55% 45%;
+  transform-origin: top center;
+  clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
+}
+#envelope-stage.opened .ribbon-tail.left {
+  transform: translate(-30px, 14px) rotate(-26deg);
   opacity: 0;
-  transform: scaleX(0.92);
+}
+#envelope-stage.opened .ribbon-tail.right {
+  transform: translate(30px, 14px) rotate(26deg);
+  opacity: 0;
 }
 
 .env-hint {
