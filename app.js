@@ -12,17 +12,13 @@ const GUESTS = {
   friend: { name: '친구', display: '친구', side: 'bride', tone: 'friendly' },
 };
 
-/* bankCode: 토스/카카오 딥링크용 (예: 004 국민, 088 신한, 020 우리, 081 하나)
+/* bankCode: 토스/카카오 딥링크용 (031 IM뱅크/대구, 004 국민, 088 신한, 020 우리, 081 하나)
    kakaoPayLink: 개인 카카오페이 송금 링크가 있으면 넣기 (없으면 딥링크 시도 후 복사) */
 const ACCOUNTS = {
   groom: [
-    { label: '신랑 형원', bank: '○○은행', number: '000-000-000000', holder: '형원', bankCode: '088' },
-    { label: '신랑 측 혼주', bank: '○○은행', number: '000-000-000000', holder: '혼주', bankCode: '004' },
+    { label: '신랑 형원', bank: 'IM뱅크', number: '508-11-9393269', holder: '형원', bankCode: '031' },
   ],
-  bride: [
-    { label: '신부 채희', bank: '○○은행', number: '000-000-000000', holder: '채희', bankCode: '088' },
-    { label: '신부 측 혼주', bank: '○○은행', number: '000-000-000000', holder: '혼주', bankCode: '020' },
-  ],
+  bride: [],
 };
 
 const INVITE_COPY = {
@@ -79,8 +75,6 @@ function applyPersonalization() {
   const heroLine = document.getElementById('hero-guest-line');
   const inviteHand = document.getElementById('invite-guest-hand');
   const invite = document.getElementById('invite-greeting');
-  const rsvpName = document.getElementById('rsvp-name');
-  const rsvpHint = document.getElementById('rsvp-name-hint');
 
   const label = guestLabel(currentGuest);
   const handName = currentGuest
@@ -119,11 +113,6 @@ function applyPersonalization() {
     }
 
     invite.innerHTML = INVITE_COPY[currentGuest.tone] || INVITE_COPY.formal;
-
-    if (rsvpName) rsvpName.value = currentGuest.name || currentGuest.display;
-    if (rsvpHint) {
-      rsvpHint.textContent = handName + '의 참석 여부를 알려주시면 준비에 큰 도움이 됩니다.';
-    }
   } else {
     if (cardGuest) cardGuest.textContent = '';
     if (cardMsg) cardMsg.innerHTML = '저희 결혼식에<br />초대합니다';
@@ -180,10 +169,10 @@ function renderAccounts(side) {
   if (!root) return;
 
   const blocks = [];
-  if (side === 'groom' || side === 'both') {
+  if ((side === 'groom' || side === 'both') && ACCOUNTS.groom.length) {
     blocks.push({ key: 'groom', title: '신랑 측', items: ACCOUNTS.groom });
   }
-  if (side === 'bride' || side === 'both') {
+  if ((side === 'bride' || side === 'both') && ACCOUNTS.bride.length) {
     blocks.push({ key: 'bride', title: '신부 측', items: ACCOUNTS.bride });
   }
 
@@ -224,19 +213,19 @@ function startSakura() {
   layer.dataset.ready = '1';
   layer.innerHTML = '';
 
-  const count = 14;
+  const count = 10;
   for (let i = 0; i < count; i++) {
     const p = document.createElement('span');
     const variant = i % 3;
     p.className = 'petal' + (variant === 1 ? ' p2' : variant === 2 ? ' p3' : '');
 
     const left = 6 + Math.random() * 88; // keep inside phone width
-    const delay = Math.random() * 7;
-    const fallDur = 11 + Math.random() * 9; // slow, gentle
-    const swayDur = 2.4 + Math.random() * 2.2;
-    const size = 9 + Math.random() * 8;
-    const amp = (18 + Math.random() * 36) * (Math.random() < 0.5 ? -1 : 1);
-    const spin = (200 + Math.random() * 260) * (Math.random() < 0.5 ? -1 : 1);
+    const delay = Math.random() * 10;
+    const fallDur = 20 + Math.random() * 14; // much slower, gentle
+    const swayDur = 4.5 + Math.random() * 3.5;
+    const size = 9 + Math.random() * 7;
+    const amp = (14 + Math.random() * 28) * (Math.random() < 0.5 ? -1 : 1);
+    const spin = (160 + Math.random() * 200) * (Math.random() < 0.5 ? -1 : 1);
 
     p.style.left = left + '%';
     p.style.width = size + 'px';
@@ -256,13 +245,13 @@ function startSakura() {
 }
 
 /* ========== ENVELOPE OPEN ==========
-   Sequence (~4.6s — slower, more emotional):
-   0.00s  seal cracks + sparks
-   0.28s  flap opens slowly
-   0.55s  card begins rising
-   ~2.0s  card fully readable — hold
-   3.4s   scene fades gently
-   4.55s  main invitation shown
+   Sequence (~5s — silk ribbon unties, then flap + card):
+   0.00s  ribbon loops/tails loosen
+   0.55s  flap opens
+   0.75s  card begins rising
+   ~2.3s  card fully readable — hold
+   3.7s   scene fades gently
+   5.0s   main invitation shown
 */
 function openInvitation(skipAnim) {
   if (opened) return;
@@ -273,7 +262,7 @@ function openInvitation(skipAnim) {
   const bgmBtn = document.getElementById('bgm-btn');
   const card = document.getElementById('env-card');
 
-  try { localStorage.setItem('hc_invite_opened', '1'); } catch (e) {}
+  try { localStorage.setItem('invite_opened', '1'); } catch (e) {}
 
   function showMain() {
     stage.classList.add('hidden-stage');
@@ -294,9 +283,9 @@ function openInvitation(skipAnim) {
 
   setTimeout(() => {
     stage.classList.add('fading');
-  }, 3400);
+  }, 3700);
 
-  setTimeout(showMain, 4550);
+  setTimeout(showMain, 5000);
 }
 
 function initAos() {
@@ -609,27 +598,6 @@ function toggleBgm() {
   }
 }
 
-/* RSVP demo (localStorage) */
-function submitRsvp(e) {
-  e.preventDefault();
-  const data = {
-    name: document.getElementById('rsvp-name').value,
-    attend: (document.querySelector('input[name="attend"]:checked') || {}).value,
-    guests: document.getElementById('rsvp-guests').value,
-    msg: document.getElementById('rsvp-msg').value,
-    guestCode: currentGuest ? currentGuest.code : null,
-    at: new Date().toISOString(),
-  };
-  try {
-    const list = JSON.parse(localStorage.getItem('hc_rsvp') || '[]');
-    list.push(data);
-    localStorage.setItem('hc_rsvp', JSON.stringify(list));
-  } catch (err) {}
-
-  document.getElementById('rsvp-form').classList.add('hidden');
-  document.getElementById('rsvp-done').classList.remove('hidden');
-  toast('전달되었습니다. 감사합니다');
-}
 
 /* INIT */
 document.addEventListener('DOMContentLoaded', () => {
@@ -640,7 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // optional: auto-skip envelope on revisit (commented for demo polish — keep envelope)
   // try {
-  //   if (localStorage.getItem('hc_invite_opened') === '1') openInvitation(true);
+  //   if (localStorage.getItem('invite_opened') === '1') openInvitation(true);
   // } catch (e) {}
 });
   
