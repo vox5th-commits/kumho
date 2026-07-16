@@ -114,222 +114,218 @@ body.locked { overflow: hidden; height: 100vh; }
   opacity: 0;
 }
 
-/* ========== SIMPLE BEIGE ENVELOPE ========== */
-.env-wrap {
+/* ========== ENVELOPE (rebuild) ========== */
+.mail {
   position: relative;
-  width: 100%;
-  max-width: 320px;
-  height: 210px;
-  perspective: 1200px;
+  width: min(88vw, 300px);
+  height: 200px;
+  margin: 0 auto;
   cursor: pointer;
   z-index: 2;
-  transition: opacity 0.55s ease 0.2s, transform 0.55s ease 0.2s;
+  transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+  /* 3d for flap only */
+  perspective: 1000px;
 }
-#envelope-stage.opened .env-wrap {
-  opacity: 0.35;
-  transform: translateY(16px) scale(0.97);
+#envelope-stage.opened .mail {
+  opacity: 0.38;
+  transform: translateY(14px) scale(0.97);
   pointer-events: none;
 }
 
-.env-shadow {
+.mail-shadow {
   position: absolute;
-  bottom: -16px;
-  left: 12%;
-  width: 76%;
-  height: 22px;
-  background: radial-gradient(ellipse, rgba(0,0,0,0.4) 0%, transparent 70%);
-  filter: blur(5px);
+  left: 10%;
+  right: 10%;
+  bottom: -14px;
+  height: 20px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.38) 0%, transparent 70%);
+  filter: blur(4px);
+  z-index: 0;
 }
 
-/* body rectangle */
-.env-body {
+/* solid beige body — always visible rectangle */
+.mail-body {
   position: absolute;
   inset: 0;
-  border-radius: 4px 4px 6px 6px;
-  background: linear-gradient(165deg, #f7f1e6 0%, #efe5d6 55%, #e8dccb 100%);
+  border-radius: 6px;
+  background: #f2ebe0;
+  background-image:
+    linear-gradient(160deg, rgba(255,255,255,0.55) 0%, transparent 48%),
+    linear-gradient(180deg, #f6f0e6 0%, #ebe2d4 100%);
   box-shadow:
-    0 16px 36px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.75);
+    0 14px 32px rgba(0,0,0,0.32),
+    inset 0 0 0 1px rgba(180,150,110,0.22);
   z-index: 1;
 }
 
-/* top flap (triangle) */
-.env-flap {
+/* top triangular flap */
+.mail-flap {
   position: absolute;
   left: 0;
-  right: 0;
   top: 0;
-  height: 50%;
+  width: 100%;
+  height: 100px;
   z-index: 5;
   transform-origin: top center;
   transform: rotateX(0deg);
-  transition: transform 1.15s cubic-bezier(0.33, 0.08, 0.2, 1) 0.5s;
+  transition: transform 1.2s cubic-bezier(0.32, 0.08, 0.2, 1) 0.48s;
   pointer-events: none;
   backface-visibility: hidden;
 }
-#envelope-stage.opened .env-flap {
-  transform: rotateX(172deg);
+#envelope-stage.opened .mail-flap {
+  transform: rotateX(168deg);
   z-index: 1;
 }
-.env-flap-face {
+.mail-flap-inner {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #faf5ec 0%, #efe4d4 100%);
+  background: #efe6d8;
+  background-image: linear-gradient(180deg, #f8f3ea 0%, #ebe1d2 100%);
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  box-shadow: 0 4px 10px rgba(90, 60, 30, 0.08);
+  -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.06));
 }
 
-/* front pocket (V cut) */
-.env-front {
+/* front pocket over body */
+.mail-pocket {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 58%;
+  height: 118px;
   z-index: 6;
-  background: linear-gradient(180deg, #f5eee3 0%, #ebe0d0 100%);
-  clip-path: polygon(0 42%, 50% 0, 100% 42%, 100% 100%, 0 100%);
-  box-shadow: inset 0 8px 14px rgba(100, 70, 40, 0.05);
+  background: #e9e0d2;
+  background-image: linear-gradient(180deg, #f0e8db 0%, #e4d9c8 100%);
+  clip-path: polygon(0 38%, 50% 0, 100% 38%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 38%, 50% 0, 100% 38%, 100% 100%, 0 100%);
+  box-shadow: inset 0 6px 10px rgba(90,60,30,0.04);
 }
-/* soft fold line on pocket */
-.env-front::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 42%;
-  background:
-    linear-gradient(135deg, transparent 49.5%, rgba(180, 150, 110, 0.28) 50%, transparent 50.5%),
-    linear-gradient(225deg, transparent 49.5%, rgba(180, 150, 110, 0.28) 50%, transparent 50.5%);
-  pointer-events: none;
+/* fallback if clip-path unsupported: still a solid bottom bar */
+@supports not (clip-path: polygon(0 0, 100% 0, 50% 100%)) {
+  .mail-pocket {
+    height: 100px;
+    clip-path: none;
+    -webkit-clip-path: none;
+    border-radius: 0 0 6px 6px;
+  }
+  .mail-flap-inner {
+    clip-path: none;
+    -webkit-clip-path: none;
+    height: 70px;
+    border-radius: 6px 6px 0 0;
+  }
 }
 
-/* red silk ribbon band */
-.ribbon-band {
+/* red silk horizontal band */
+.mail-band {
   position: absolute;
-  left: -6%;
-  right: -6%;
-  top: 38%;
-  height: 16px;
+  left: -4%;
+  right: -4%;
+  top: 72px;
+  height: 15px;
   z-index: 8;
-  pointer-events: none;
+  border-radius: 1px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.28) 0%, transparent 45%),
-    linear-gradient(90deg, #8e1f2c 0%, #c23a48 18%, #d94a58 50%, #c23a48 82%, #8e1f2c 100%);
+    linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 42%),
+    linear-gradient(90deg, #7a1824 0%, #c43345 20%, #e04a5a 50%, #c43345 80%, #7a1824 100%);
   box-shadow:
-    0 2px 5px rgba(0,0,0,0.18),
-    inset 0 1px 0 rgba(255,255,255,0.3),
-    inset 0 -1px 0 rgba(60,10,15,0.2);
-  transition: opacity 0.75s ease 0.35s, transform 0.9s ease 0.2s;
+    0 2px 6px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.28);
+  transition: opacity 0.7s ease 0.3s, transform 0.85s ease 0.15s;
+  pointer-events: none;
 }
-#envelope-stage.opened .ribbon-band {
+#envelope-stage.opened .mail-band {
   opacity: 0;
-  transform: scaleX(0.94);
+  transform: scaleX(0.92);
 }
 
 /* red silk bow */
-.ribbon {
+.mail-bow {
   position: absolute;
   left: 50%;
-  top: 38%;
+  top: 72px;
+  width: 108px;
+  height: 64px;
   transform: translate(-50%, -50%);
   z-index: 9;
-  width: 120px;
-  height: 72px;
   pointer-events: none;
 }
-.ribbon-loop {
+.mail-bow .loop {
   position: absolute;
-  top: 8px;
-  width: 34px;
-  height: 28px;
+  top: 6px;
+  width: 32px;
+  height: 26px;
+  border-radius: 50%;
   background:
-    radial-gradient(ellipse at 38% 32%, rgba(255,220,220,0.45) 0%, transparent 52%),
-    linear-gradient(155deg, #e0606c 0%, #c23a48 42%, #8e1f2c 100%);
-  border-radius: 50% 50% 48% 48%;
+    radial-gradient(ellipse at 35% 30%, rgba(255,210,210,0.45) 0%, transparent 55%),
+    linear-gradient(150deg, #e85a68 0%, #c43345 45%, #8a1c28 100%);
   box-shadow:
-    inset 0 2px 3px rgba(255,255,255,0.35),
-    inset 0 -2px 4px rgba(60,10,15,0.25),
-    0 2px 5px rgba(0,0,0,0.15);
-  transition:
-    transform 1.05s cubic-bezier(0.33, 0.1, 0.2, 1) 0.05s,
-    opacity 0.85s ease 0.18s;
+    inset 0 2px 3px rgba(255,255,255,0.3),
+    0 2px 4px rgba(0,0,0,0.18);
+  transition: transform 1s ease 0.05s, opacity 0.8s ease 0.15s;
 }
-.ribbon-loop.left {
-  left: 22px;
+.mail-bow .loop.l {
+  left: 18px;
+  transform: rotate(-14deg);
   transform-origin: right center;
-  transform: rotate(-16deg);
 }
-.ribbon-loop.right {
-  right: 22px;
+.mail-bow .loop.r {
+  right: 18px;
+  transform: rotate(14deg);
   transform-origin: left center;
-  transform: rotate(16deg);
 }
-#envelope-stage.opened .ribbon-loop.left {
-  transform: translate(-42px, -6px) rotate(-50deg) scale(0.88);
+#envelope-stage.opened .mail-bow .loop.l {
+  transform: translate(-36px, -4px) rotate(-48deg);
   opacity: 0;
 }
-#envelope-stage.opened .ribbon-loop.right {
-  transform: translate(42px, -6px) rotate(50deg) scale(0.88);
+#envelope-stage.opened .mail-bow .loop.r {
+  transform: translate(36px, -4px) rotate(48deg);
   opacity: 0;
 }
-.ribbon-knot {
+.mail-bow .knot {
   position: absolute;
   left: 50%;
-  top: 16px;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 18px;
+  top: 12px;
+  width: 18px;
+  height: 16px;
+  margin-left: -9px;
   border-radius: 40%;
   background:
-    radial-gradient(circle at 35% 30%, rgba(255,220,220,0.5) 0%, transparent 50%),
-    linear-gradient(180deg, #d94a58 0%, #b02e3c 55%, #7a1822 100%);
-  box-shadow:
-    0 2px 5px rgba(0,0,0,0.2),
-    inset 0 1px 2px rgba(255,255,255,0.4);
+    radial-gradient(circle at 35% 30%, rgba(255,220,220,0.45) 0%, transparent 50%),
+    linear-gradient(180deg, #e04a5a 0%, #a82836 100%);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.22);
   z-index: 2;
-  transition:
-    transform 1s cubic-bezier(0.33, 0.1, 0.2, 1) 0.08s,
-    opacity 0.8s ease 0.2s;
+  transition: transform 0.95s ease 0.08s, opacity 0.75s ease 0.18s;
 }
-#envelope-stage.opened .ribbon-knot {
-  transform: translateX(-50%) translateY(8px) scale(0.55);
+#envelope-stage.opened .mail-bow .knot {
+  transform: translateY(8px) scale(0.5);
   opacity: 0;
 }
-.ribbon-tail {
+.mail-bow .tail {
   position: absolute;
-  top: 34px;
-  width: 16px;
-  height: 40px;
-  background:
-    linear-gradient(180deg, #d94a58 0%, #c23a48 40%, #8e1f2c 100%);
-  box-shadow:
-    inset 1px 0 0 rgba(255,255,255,0.25),
-    inset -1px 0 0 rgba(60,10,15,0.2),
-    0 2px 4px rgba(0,0,0,0.12);
-  transition:
-    transform 1.15s cubic-bezier(0.33, 0.1, 0.2, 1) 0.12s,
-    opacity 0.9s ease 0.25s;
+  top: 30px;
+  width: 14px;
+  height: 34px;
+  background: linear-gradient(180deg, #e04a5a 0%, #c43345 40%, #7a1824 100%);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.12);
+  transition: transform 1.1s ease 0.1s, opacity 0.85s ease 0.22s;
 }
-.ribbon-tail.left {
-  left: 38px;
-  border-radius: 2px 2px 45% 55%;
+.mail-bow .tail.l {
+  left: 34px;
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%);
   transform-origin: top center;
-  clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
 }
-.ribbon-tail.right {
-  right: 38px;
-  border-radius: 2px 2px 55% 45%;
+.mail-bow .tail.r {
+  right: 34px;
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%);
   transform-origin: top center;
-  clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%);
 }
-#envelope-stage.opened .ribbon-tail.left {
-  transform: translate(-30px, 14px) rotate(-26deg);
+#envelope-stage.opened .mail-bow .tail.l {
+  transform: translate(-24px, 12px) rotate(-24deg);
   opacity: 0;
 }
-#envelope-stage.opened .ribbon-tail.right {
-  transform: translate(30px, 14px) rotate(26deg);
+#envelope-stage.opened .mail-bow .tail.r {
+  transform: translate(24px, 12px) rotate(24deg);
   opacity: 0;
 }
 
