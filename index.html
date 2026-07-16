@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&family=Nanum+Pen+Script&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -33,10 +33,12 @@
             'gold-light': '#e2d1b0',
             'gold-dark': '#9a7b4f',
             soft: '#8a857c',
+            blossom: '#f3c4cb',
           },
           fontFamily: {
             serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
             script: ['"Great Vibes"', 'cursive'],
+            pen: ['"Nanum Pen Script"', 'cursive'],
             sans: ['Pretendard', 'system-ui', 'sans-serif'],
           },
         },
@@ -71,6 +73,28 @@
 
     .font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
     .font-script { font-family: 'Great Vibes', cursive; }
+    .font-pen { font-family: 'Nanum Pen Script', cursive; }
+
+    /* guest handwriting name */
+    .guest-hand {
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: 1.65rem;
+      line-height: 1.25;
+      letter-spacing: 0.04em;
+      color: var(--gold-light);
+      text-shadow: 0 1px 12px rgba(0,0,0,0.18);
+    }
+    .guest-hand-dark {
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: 1.85rem;
+      line-height: 1.3;
+      letter-spacing: 0.03em;
+      color: var(--navy);
+    }
+    #env-guest-name.guest-hand {
+      font-size: 1.75rem;
+      color: var(--gold-light);
+    }
 
     /* ========== ENVELOPE OVERLAY ========== */
     #envelope-stage {
@@ -724,36 +748,81 @@
       border-left: 1px solid var(--gold);
     }
 
-    /* full-bleed photo — soft fade into background (not oval crop) */
+    /* hero: photo full-bleed, bottom soft fade into invitation paper */
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+      background: var(--paper);
+    }
     .hero-photo {
       position: absolute;
       inset: 0;
+      z-index: 0;
       background-size: cover;
       background-position: center 30%;
+      /* 1) mask: photo pixels dissolve downward (iOS needs -webkit + size) */
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 38%,
+        rgba(0, 0, 0, 0.92) 50%,
+        rgba(0, 0, 0, 0.55) 65%,
+        rgba(0, 0, 0, 0.2) 80%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 38%,
+        rgba(0, 0, 0, 0.92) 50%,
+        rgba(0, 0, 0, 0.55) 65%,
+        rgba(0, 0, 0, 0.2) 80%,
+        transparent 100%
+      );
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+    /* 2) always-on gradient layer — works even if mask is weak */
+    .hero-fade {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 58%;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        rgba(12, 18, 32, 0) 0%,
+        rgba(12, 18, 32, 0.08) 18%,
+        rgba(12, 18, 32, 0.35) 40%,
+        rgba(12, 18, 32, 0.62) 58%,
+        rgba(30, 28, 26, 0.78) 72%,
+        rgba(120, 112, 102, 0.55) 86%,
+        rgba(247, 243, 236, 0.88) 95%,
+        var(--paper) 100%
+      );
     }
     .hero-overlay {
-      /* long soft fade: photo → night bg (bottom & sides dissolve naturally) */
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(12, 18, 32, 0.08) 0%,
-          rgba(12, 18, 32, 0.05) 28%,
-          rgba(12, 18, 32, 0.18) 48%,
-          rgba(12, 18, 32, 0.42) 62%,
-          rgba(12, 18, 32, 0.72) 76%,
-          rgba(12, 18, 32, 0.92) 88%,
-          var(--night) 100%
-        ),
-        linear-gradient(
-          to right,
-          rgba(12, 18, 32, 0.35) 0%,
-          transparent 12%,
-          transparent 88%,
-          rgba(12, 18, 32, 0.35) 100%
-        );
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      /* top/mid only: keep names readable without killing bottom fade */
+      background: linear-gradient(
+        to bottom,
+        rgba(12, 18, 32, 0.32) 0%,
+        rgba(12, 18, 32, 0.1) 18%,
+        rgba(12, 18, 32, 0.06) 35%,
+        rgba(12, 18, 32, 0.2) 55%,
+        transparent 72%
+      );
     }
-    .phone > section.hero-section {
-      overflow: hidden;
+    .hero-section .hero-copy {
+      position: relative;
+      z-index: 3;
     }
 
     .section-label {
@@ -1065,6 +1134,153 @@
       letter-spacing: 0.2em;
       color: var(--gold);
     }
+
+    /* map preview card */
+    .map-card {
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(196,165,116,0.22);
+      background: #fff;
+      box-shadow: 0 14px 40px -16px rgba(20,28,43,0.12);
+    }
+    .map-frame {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: #e8e4dc;
+    }
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      filter: grayscale(0.15) contrast(0.98);
+    }
+    .map-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 0 0 0 1px rgba(196,165,116,0.15);
+    }
+    .nav-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(196,165,116,0.35);
+      font-size: 12px;
+      color: var(--navy);
+      background: rgba(255,255,255,0.8);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-chip:active { transform: scale(0.97); background: rgba(196,165,116,0.1); }
+
+    /* pay / gift deep-link buttons */
+    .pay-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .pay-btn {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(196,165,116,0.35);
+      background: transparent;
+      color: var(--navy);
+      letter-spacing: 0.02em;
+      cursor: pointer;
+    }
+    .pay-btn.toss {
+      border-color: rgba(0, 98, 255, 0.35);
+      color: #0062ff;
+    }
+    .pay-btn.kakao {
+      border-color: rgba(60, 30, 30, 0.2);
+      background: rgba(254, 229, 0, 0.35);
+      color: #3c1e1e;
+    }
+    .pay-btn.copy {
+      color: var(--navy);
+    }
+
+    /* cherry blossoms — only inside .phone (mobile frame), soft flutter */
+    #sakura-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 35;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 1.4s ease;
+    }
+    #sakura-layer.on { opacity: 1; }
+    .petal {
+      position: absolute;
+      top: -8%;
+      width: 12px;
+      height: 10px;
+      margin-left: -6px;
+      /* soft sakura silhouette */
+      border-radius: 100% 0 90% 0;
+      background:
+        radial-gradient(circle at 30% 30%, #fff6f7 0%, transparent 42%),
+        linear-gradient(145deg, #fde6ea 0%, #f2b8c2 48%, #e89aab 100%);
+      opacity: 0;
+      box-shadow: 0 1px 2px rgba(180, 100, 120, 0.12);
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+      animation-name: petal-fall, petal-sway;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite, infinite;
+    }
+    .petal::after {
+      content: '';
+      position: absolute;
+      inset: 18% 22%;
+      border-radius: inherit;
+      background: radial-gradient(circle at 40% 35%, rgba(255,255,255,0.55), transparent 70%);
+      pointer-events: none;
+    }
+    .petal.p2 {
+      border-radius: 0 100% 0 90%;
+      background:
+        radial-gradient(circle at 65% 35%, #fff8f9 0%, transparent 40%),
+        linear-gradient(210deg, #fceef0 0%, #efb0bc 100%);
+    }
+    .petal.p3 {
+      border-radius: 90% 10% 100% 0;
+      width: 9px;
+      height: 11px;
+      background: linear-gradient(160deg, #f9d4db 0%, #e8a0b0 100%);
+    }
+    /* fall down the phone column */
+    @keyframes petal-fall {
+      0% {
+        top: -8%;
+        opacity: 0;
+      }
+      6% { opacity: 0.72; }
+      85% { opacity: 0.45; }
+      100% {
+        top: 104%;
+        opacity: 0;
+      }
+    }
+    /* side-to-side flutter + tumble (emotional drift) */
+    @keyframes petal-sway {
+      0%   { transform: translateX(0) rotate(0deg) scale(1); }
+      15%  { transform: translateX(calc(var(--amp) * 0.55)) rotate(28deg) scale(1.05); }
+      30%  { transform: translateX(calc(var(--amp) * -0.35)) rotate(-18deg) scale(0.95); }
+      48%  { transform: translateX(calc(var(--amp) * 0.85)) rotate(52deg) scale(1.08); }
+      65%  { transform: translateX(calc(var(--amp) * -0.6)) rotate(-36deg) scale(0.92); }
+      82%  { transform: translateX(calc(var(--amp) * 0.4)) rotate(70deg) scale(1.02); }
+      100% { transform: translateX(calc(var(--amp) * -0.2)) rotate(var(--spin)) scale(0.88); }
+    }
   </style>
 </head>
 <body class="locked antialiased">
@@ -1076,7 +1292,7 @@
     <div class="env-scene">
       <p class="env-to">
         <small>Wedding Invitation</small>
-        <span id="env-guest-name">소중한 분</span>
+        <span id="env-guest-name" class="guest-hand">소중한 분</span>
       </p>
 
       <!-- reveal card (rises out of envelope on open) -->
@@ -1134,36 +1350,40 @@
   <!-- ========== MAIN ========== -->
   <div id="main-app">
     <div class="phone">
+      <!-- sakura only inside phone (mobile frame) -->
+      <div id="sakura-layer" aria-hidden="true"></div>
 
       <!-- HERO -->
-      <section class="hero-section relative h-[92vh] min-h-[560px] bg-night">
+      <section class="hero-section relative h-[92vh] min-h-[560px]">
         <div class="hero-photo"
              style="background-image: url('main-photo.jpg');"></div>
-        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="hero-fade" aria-hidden="true"></div>
+        <div class="hero-overlay"></div>
 
-        <div class="absolute inset-x-0 top-0 pt-10 flex justify-center" data-aos="fade-down">
+        <div class="hero-copy absolute inset-x-0 top-0 pt-10 flex justify-center" data-aos="fade-down">
           <p class="text-gold-light/70 text-[10px] tracking-[0.5em] uppercase font-serif">The Wedding of</p>
         </div>
 
-        <div class="absolute bottom-14 left-0 right-0 px-8 text-center text-ivory" data-aos="fade-up">
-          <p id="hero-guest-line" class="text-gold-light/80 text-sm font-light mb-6 tracking-wide hidden"></p>
+        <div class="hero-copy absolute bottom-[18%] left-0 right-0 px-8 text-center text-ivory" data-aos="fade-up">
+          <p id="hero-guest-line" class="guest-hand mb-5 hidden"></p>
           <h1 class="font-serif font-light leading-none mb-3">
-            <span class="block text-5xl tracking-wide">형원</span>
+            <span class="block text-5xl tracking-wide drop-shadow-sm">형원</span>
             <span class="block font-script text-3xl text-gold my-3">and</span>
-            <span class="block text-5xl tracking-wide">채희</span>
+            <span class="block text-5xl tracking-wide drop-shadow-sm">채희</span>
           </h1>
           <div class="gold-line my-7 opacity-70"></div>
           <p class="font-serif text-lg tracking-[0.25em] text-gold-light/90">2027. 4. 25 SUN</p>
-          <p class="mt-2 text-sm text-ivory/60 font-light tracking-wide">오후 12시</p>
-          <p class="mt-4 text-xs text-ivory/45 tracking-[0.12em]">포항 포마레 웨딩 컨벤션</p>
+          <p class="mt-2 text-sm text-ivory/70 font-light tracking-wide">오후 12시</p>
+          <p class="mt-4 text-xs text-ivory/55 tracking-[0.12em]">포항 포마레 웨딩 컨벤션</p>
         </div>
       </section>
 
-      <!-- INVITE MESSAGE -->
-      <section class="px-9 pt-20 pb-16 bg-paper">
+      <!-- INVITE MESSAGE (slight overlap so fade into paper is seamless) -->
+      <section class="px-9 pt-10 pb-16 bg-paper -mt-10 relative z-[1]">
         <div class="text-center" data-aos="fade-up">
           <p class="section-label mb-8">Invitation</p>
           <i class="fa-solid fa-quote-left text-gold/40 text-xl mb-5"></i>
+          <p id="invite-guest-hand" class="guest-hand-dark mb-4 hidden"></p>
           <h2 class="font-serif text-2xl text-navy mb-8 font-medium tracking-wide">새로운 시작을 알려드립니다</h2>
           <p id="invite-greeting" class="text-[15px] leading-[2] text-[#5c574f] font-light">
             서로가 마주 보며 다져온 사랑을<br />
@@ -1217,12 +1437,39 @@
             </div>
           </div>
 
-          <div class="mt-9 space-y-3">
+          <!-- map preview -->
+          <div class="map-card mt-8" data-aos="fade-up">
+            <div class="map-frame">
+              <iframe
+                title="포항 포마레 웨딩 컨벤션 지도"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://maps.google.com/maps?q=%ED%8F%AC%ED%95%AD%20%ED%8F%AC%EB%A7%88%EB%A0%88%20%EC%9B%A8%EB%94%A9%20%EC%BB%A8%EB%B2%A4%EC%85%98&hl=ko&z=15&output=embed">
+              </iframe>
+            </div>
+            <div class="px-5 py-4">
+              <p class="font-serif text-base text-navy tracking-wide">포마레 웨딩 컨벤션</p>
+              <p class="text-xs text-soft mt-1 leading-relaxed">경상북도 포항시 · 지도 핀 위치를 확인해 주세요</p>
+              <div class="mt-4 grid grid-cols-3 gap-2">
+                <a class="nav-chip" href="https://map.kakao.com/?q=포항%20포마레%20웨딩%20컨벤션" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-location-arrow text-[10px] text-gold"></i>카카오
+                </a>
+                <a class="nav-chip" href="https://map.naver.com/v5/search/포항%20포마레%20웨딩%20컨벤션" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-map text-[10px] text-gold"></i>네이버
+                </a>
+                <a class="nav-chip" href="https://www.google.com/maps/search/?api=1&query=포항+포마레+웨딩+컨벤션" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-compass text-[10px] text-gold"></i>구글
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 space-y-3">
             <a href="https://map.kakao.com/?q=포항%20포마레%20웨딩%20컨벤션" target="_blank" rel="noopener"
                class="btn-gold w-full py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2 tracking-wide">
               <i class="fa-solid fa-map text-gold text-xs"></i> 카카오맵 길찾기
             </a>
-            <a href="tel:0212345678"
+            <a href="tel:0540000000"
                class="btn-outline w-full py-3.5 rounded-xl text-sm font-medium flex items-center justify-center gap-2">
               <i class="fa-solid fa-phone text-xs"></i> 예식장 전화
             </a>
@@ -1499,14 +1746,16 @@
       friend: { name: '친구', display: '친구', side: 'bride', tone: 'friendly' },
     };
 
+    /* bankCode: 토스/카카오 딥링크용 (예: 004 국민, 088 신한, 020 우리, 081 하나)
+       kakaoPayLink: 개인 카카오페이 송금 링크가 있으면 넣기 (없으면 딥링크 시도 후 복사) */
     const ACCOUNTS = {
       groom: [
-        { label: '신랑 형원', bank: '○○은행', number: '000-000-000000', holder: '형원' },
-        { label: '신랑 측 혼주', bank: '○○은행', number: '000-000-000000', holder: '혼주' },
+        { label: '신랑 형원', bank: '○○은행', number: '000-000-000000', holder: '형원', bankCode: '088' },
+        { label: '신랑 측 혼주', bank: '○○은행', number: '000-000-000000', holder: '혼주', bankCode: '004' },
       ],
       bride: [
-        { label: '신부 채희', bank: '○○은행', number: '000-000-000000', holder: '채희' },
-        { label: '신부 측 혼주', bank: '○○은행', number: '000-000-000000', holder: '혼주' },
+        { label: '신부 채희', bank: '○○은행', number: '000-000-000000', holder: '채희', bankCode: '088' },
+        { label: '신부 측 혼주', bank: '○○은행', number: '000-000-000000', holder: '혼주', bankCode: '020' },
       ],
     };
 
@@ -1562,18 +1811,27 @@
       const cardGuest = document.getElementById('env-card-guest');
       const cardMsg = document.getElementById('env-card-msg');
       const heroLine = document.getElementById('hero-guest-line');
+      const inviteHand = document.getElementById('invite-guest-hand');
       const invite = document.getElementById('invite-greeting');
       const rsvpName = document.getElementById('rsvp-name');
       const rsvpHint = document.getElementById('rsvp-name-hint');
 
       const label = guestLabel(currentGuest);
-      envName.textContent = label;
+      const handName = currentGuest
+        ? (currentGuest.tone === 'formal' && !currentGuest.display.includes('님')
+            ? currentGuest.display + ' 님'
+            : currentGuest.display)
+        : '소중한 분';
+
+      if (envName) {
+        envName.textContent = handName;
+        envName.classList.add('guest-hand');
+      }
 
       if (currentGuest) {
         if (cardGuest) {
-          cardGuest.textContent = (currentGuest.tone === 'friendly')
-            ? 'To. ' + currentGuest.display
-            : 'To. ' + label;
+          cardGuest.innerHTML = '<span class="guest-hand-dark" style="font-size:1.35rem">To. ' +
+            (currentGuest.tone === 'friendly' ? currentGuest.display : handName) + '</span>';
         }
         if (cardMsg) {
           if (currentGuest.tone === 'friendly') {
@@ -1581,33 +1839,74 @@
           } else if (currentGuest.tone === 'family') {
             cardMsg.innerHTML = '자리를 빛내 주시면<br />감사하겠습니다';
           } else {
-            cardMsg.innerHTML = label + '을<br />초대합니다';
+            cardMsg.innerHTML = handName + '을<br />초대합니다';
           }
         }
 
-        heroLine.textContent = formatHeroLine(currentGuest);
-        heroLine.classList.remove('hidden');
+        if (heroLine) {
+          heroLine.innerHTML = formatHeroLineHand(currentGuest, handName);
+          heroLine.classList.remove('hidden');
+        }
+        if (inviteHand) {
+          inviteHand.textContent = handName + '께';
+          inviteHand.classList.remove('hidden');
+        }
 
         invite.innerHTML = INVITE_COPY[currentGuest.tone] || INVITE_COPY.formal;
 
         if (rsvpName) rsvpName.value = currentGuest.name || currentGuest.display;
         if (rsvpHint) {
-          rsvpHint.textContent = label + '의 참석 여부를 알려주시면 준비에 큰 도움이 됩니다.';
+          rsvpHint.textContent = handName + '의 참석 여부를 알려주시면 준비에 큰 도움이 됩니다.';
         }
       } else {
         if (cardGuest) cardGuest.textContent = '';
         if (cardMsg) cardMsg.innerHTML = '저희 결혼식에<br />초대합니다';
+        if (heroLine) heroLine.classList.add('hidden');
+        if (inviteHand) inviteHand.classList.add('hidden');
         invite.innerHTML = INVITE_COPY.formal;
       }
 
       renderAccounts(currentGuest ? currentGuest.side : 'both');
     }
 
-    function formatHeroLine(g) {
-      if (g.tone === 'friendly') return g.display + ', 우리 결혼합니다';
-      if (g.tone === 'family') return g.display + ', 자리를 빛내 주세요';
-      const n = g.display.includes('님') ? g.display : g.display + ' 님';
-      return n + '을 결혼식에 초대합니다';
+    function formatHeroLineHand(g, handName) {
+      if (g.tone === 'friendly') return handName + ', 우리 결혼합니다';
+      if (g.tone === 'family') return handName + ', 자리를 빛내 주세요';
+      return handName + ', 초대합니다';
+    }
+
+    function bareAccount(num) {
+      return String(num || '').replace(/\D/g, '');
+    }
+
+    function openTossPay(bankCode, accountNo) {
+      const bare = bareAccount(accountNo);
+      const code = bankCode || '';
+      const deep = 'supertoss://send?amount=0&bankCode=' + encodeURIComponent(code) +
+        '&accountNo=' + encodeURIComponent(bare);
+      try { window.location.href = deep; } catch (e) {}
+      setTimeout(function () {
+        if (document.visibilityState === 'visible') {
+          copyText(accountNo, '토스 앱을 열 수 없어 계좌번호를 복사했습니다');
+        }
+      }, 1800);
+    }
+
+    function openKakaoPay(bankCode, accountNo, kakaoPayLink) {
+      if (kakaoPayLink) {
+        window.open(kakaoPayLink, '_blank', 'noopener');
+        return;
+      }
+      const bare = bareAccount(accountNo);
+      const code = bankCode || '';
+      const deep = 'kakaotalk://kakaopay/money/to/bank?bank_code=' + encodeURIComponent(code) +
+        '&account_number=' + encodeURIComponent(bare);
+      try { window.location.href = deep; } catch (e) {}
+      setTimeout(function () {
+        if (document.visibilityState === 'visible') {
+          copyText(accountNo, '카카오페이를 열 수 없어 계좌번호를 복사했습니다');
+        }
+      }, 1800);
     }
 
     function renderAccounts(side) {
@@ -1629,24 +1928,65 @@
             <i class="fa-solid fa-chevron-down text-gold text-xs acc-chevron" id="${b.key}-chevron"></i>
           </button>
           <div class="acc-body" id="${b.key}-body">
-            <div class="px-5 pb-5 space-y-4">
-              ${b.items.map((a, i) => `
-                <div class="flex items-end justify-between gap-3 border-t border-gold/10 pt-4">
-                  <div>
-                    <p class="text-xs text-soft mb-1">${a.label}</p>
-                    <p class="text-sm text-navy">${a.bank} <span class="font-medium tracking-wide">${a.number}</span></p>
-                    <p class="text-xs text-soft mt-0.5">예금주 ${a.holder}</p>
+            <div class="px-5 pb-5 space-y-5">
+              ${b.items.map((a) => {
+                const num = a.number;
+                const code = a.bankCode || '';
+                const kLink = a.kakaoPayLink ? String(a.kakaoPayLink).replace(/'/g, "\\'") : '';
+                return `
+                <div class="border-t border-gold/10 pt-4">
+                  <p class="text-xs text-soft mb-1">${a.label}</p>
+                  <p class="text-sm text-navy">${a.bank} <span class="font-medium tracking-wide">${num}</span></p>
+                  <p class="text-xs text-soft mt-0.5">예금주 ${a.holder}</p>
+                  <div class="pay-btns">
+                    <button type="button" class="pay-btn copy" onclick="copyText('${num}', '계좌번호가 복사되었습니다')">계좌 복사</button>
+                    <button type="button" class="pay-btn toss" onclick="openTossPay('${code}', '${num}')">토스 송금</button>
+                    <button type="button" class="pay-btn kakao" onclick="openKakaoPay('${code}', '${num}', '${kLink}')">카카오페이</button>
                   </div>
-                  <button type="button" onclick="copyText('${a.number}', '계좌번호가 복사되었습니다')"
-                          class="shrink-0 text-[11px] px-3 py-1.5 border border-gold/40 rounded-full text-navy tracking-wide">
-                    복사
-                  </button>
-                </div>
-              `).join('')}
+                </div>`;
+              }).join('')}
             </div>
           </div>
         </div>
       `).join('');
+    }
+
+    /* cherry blossoms — inside .phone only, soft flutter fall */
+    function startSakura() {
+      const layer = document.getElementById('sakura-layer');
+      if (!layer || layer.dataset.ready === '1') return;
+      layer.dataset.ready = '1';
+      layer.innerHTML = '';
+
+      const count = 14;
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('span');
+        const variant = i % 3;
+        p.className = 'petal' + (variant === 1 ? ' p2' : variant === 2 ? ' p3' : '');
+
+        const left = 6 + Math.random() * 88; // keep inside phone width
+        const delay = Math.random() * 7;
+        const fallDur = 11 + Math.random() * 9; // slow, gentle
+        const swayDur = 2.4 + Math.random() * 2.2;
+        const size = 9 + Math.random() * 8;
+        const amp = (18 + Math.random() * 36) * (Math.random() < 0.5 ? -1 : 1);
+        const spin = (200 + Math.random() * 260) * (Math.random() < 0.5 ? -1 : 1);
+
+        p.style.left = left + '%';
+        p.style.width = size + 'px';
+        p.style.height = (size * (0.75 + Math.random() * 0.35)) + 'px';
+        p.style.setProperty('--amp', amp + 'px');
+        p.style.setProperty('--spin', spin + 'deg');
+        // two animations: fall (duration1) + sway (duration2)
+        p.style.animationDuration = fallDur + 's, ' + swayDur + 's';
+        p.style.animationDelay = delay + 's, ' + (delay * 0.35) + 's';
+
+        layer.appendChild(p);
+      }
+
+      requestAnimationFrame(function () {
+        layer.classList.add('on');
+      });
     }
 
     /* ========== ENVELOPE OPEN ==========
@@ -1675,6 +2015,7 @@
         document.body.classList.remove('locked');
         bgmBtn.classList.add('visible');
         initAos();
+        startSakura();
       }
 
       if (skipAnim) {
